@@ -4449,7 +4449,7 @@ name: "ingles",
 kind: "Ingles"
 } ],
 deviceReady: function(e, t) {
-inicio();
+inicio_getFS();
 },
 x_idiomaChanged: function() {
 this.$.principal.setX_idioma(this.x_idioma), this.$.preg_resp.setX_idioma(this.x_idioma), this.$.opciones.setX_idioma(this.x_idioma);
@@ -4567,7 +4567,8 @@ fit: !0
 name: "b_salir",
 kind: "onyx.Button",
 style: "background-color: red",
-content: "Salir"
+content: "Salir",
+ontap: "fb_salir"
 } ]
 }, {
 name: "reset_sn",
@@ -4759,6 +4760,9 @@ this.$.b_estadisticas.setStyle("margin-right: 0px"), miTest.$.opciones.setX_actu
 },
 ayuda: function(e, t) {
 this.log(this.x_idioma), this.log(this.x_idioma - 0 + 4), miTest.setIndex(this.x_idioma - 0 + 4);
+},
+fb_salir: function() {
+navigator.app.exitApp();
 }
 });
 
@@ -5440,66 +5444,153 @@ var VERSION_ACTUAL = "1", logs = "", miTest, dir_test, H = window.innerHeight, W
 
 if (W < 241) var term = 1, p1p1 = 6; else if (W < 321) var term = 2, p1p1 = 12; else var term = 3, p1p1 = 12;
 
-var marcada = !1, nombre = "", ultima = "", tamano = 0, tamano_actual = 0, numero_preguntas = 0, lista = new Array, num_preg = 0, acertadas = 0, control = new Array, marcas = new Array, indice_control = 0, num_pregs_control = 0, m1 = [ [ "Si", "Salir", "Preferencias", "Cancelar", "Grabar", "Aplicar", "No", "Si" ], [ "Yes", "Exit", "Preferences", "Cancel", "Save", "Apply", "No", "Ok" ] ], m2 = [ [ "DISPONIBLES", "LISTA ACTUAL", "Marcadas", "Empezar", "\u00bfReiniciar acertadas?" ], [ "AVAILABLE", "CURRENT LIST", "Marked", "Start", "Reset corrects?" ] ], m3 = [ [ "N\u00fam. marcas", "Desmarcar", "Fichero con marcadas", "Borrar marcadas", "Quitar todas las marcas" ], [ "Num. marks", "Unmark", "Marked to file", "Remove marked", "Remove all marks" ] ], m4 = [ [ "Nombre del fichero", "Eliminar preguntas", "Volver", "Respuesta", "Marcar", "Desmarcar" ], [ "File name", "Remove questions", "Back", "Answer", "Mark", "Unmark" ] ], m5 = [ [ "PREGUNTA", "RESPUESTA", "Tama\u00f1o de letra", "Fondo" ], [ "QUESTION", "ANSWER", "Font size", "Background" ] ], ay = [ [ "<br />Toca en DISPONIBLES para elegir lista<br /><br />Toca en nn/nn para reiniciar acertadas<br />Formato de los ficheros " ], [ "<br />Tap on AVAILABLES to choose list<br /><br />Tap on nn/nn to reset corrects" ] ], ii = [ "<br /><br />----<br /><br />Antonio Tovar<br />antovar@260mb.com<br /><br />" ], prefs = new Array, VERSION = 0, IDIOMA = 1, P_TXT_TAM = 2, R_TXT_TAM = 3, P_TXT_R = 4, P_TXT_G = 5, P_TXT_B = 6, R_TXT_R = 7, R_TXT_G = 8, R_TXT_B = 9, P_FON_R = 10, P_FON_G = 11, P_FON_B = 12, R_FON_R = 13, R_FON_G = 14, R_FON_B = 15;
+var marcada = !1, nombre = "", nombre_prox = "", ultima = "", tamano = 0, tamano_actual = 0, numero_preguntas = 0, lista = new Array, num_preg = 0, acertadas = 0, control = new Array, marcas = new Array, indice_control = 0, num_pregs_control = 0, m1 = [ [ "Si", "Salir", "Preferencias", "Cancelar", "Grabar", "Aplicar", "No", "Si" ], [ "Yes", "Exit", "Preferences", "Cancel", "Save", "Apply", "No", "Ok" ] ], m2 = [ [ "DISPONIBLES", "LISTA ACTUAL", "Marcadas", "Empezar", "\u00bfReiniciar acertadas?" ], [ "AVAILABLE", "CURRENT LIST", "Marked", "Start", "Reset corrects?" ] ], m3 = [ [ "N\u00fam. marcas", "Desmarcar", "Fichero con marcadas", "Borrar marcadas", "Quitar todas las marcas" ], [ "Num. marks", "Unmark", "Marked to file", "Remove marked", "Remove all marks" ] ], m4 = [ [ "Nombre del fichero", "Eliminar preguntas", "Volver", "Respuesta", "Marcar", "Desmarcar" ], [ "File name", "Remove questions", "Back", "Answer", "Mark", "Unmark" ] ], m5 = [ [ "PREGUNTA", "RESPUESTA", "Tama\u00f1o de letra", "Fondo" ], [ "QUESTION", "ANSWER", "Font size", "Background" ] ], ay = [ [ "<br />Toca en DISPONIBLES para elegir lista<br /><br />Toca en nn/nn para reiniciar acertadas<br />Formato de los ficheros " ], [ "<br />Tap on AVAILABLES to choose list<br /><br />Tap on nn/nn to reset corrects" ] ], ii = [ "<br /><br />----<br /><br />Antonio Tovar<br />antovar@260mb.com<br /><br />" ], prefs = new Array, VERSION = 0, IDIOMA = 1, P_TXT_TAM = 2, R_TXT_TAM = 3, P_TXT_R = 4, P_TXT_G = 5, P_TXT_B = 6, R_TXT_R = 7, R_TXT_G = 8, R_TXT_B = 9, P_FON_R = 10, P_FON_G = 11, P_FON_B = 12, R_FON_R = 13, R_FON_G = 14, R_FON_B = 15;
 
-// d_funciones.js
+// funciones.js
+
+function fallo_wr_pref(e) {
+console.log("Error wr prefs: " + e.code);
+}
+
+function fallo_fs(e) {
+alert("FileSys Error: " + e.code), navigator.app.exitApp();
+}
 
 function milog(e) {
 logs = logs + e + "<br />\n";
 }
 
-function inicio() {
-d_preferencias();
-}
-
 function fbReseteo(e) {
-milog("fbResetear"), acertadas = 0, control = new Array;
+control = new Array;
 for (var t = 0; t < numero_preguntas; t++) control.push(t * 2);
-num_pregs_control = numero_preguntas, e && (e = new Array), miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas(acertadas + "/" + numero_preguntas), carga_pregunta();
+num_pregs_control = numero_preguntas, e && (e = new Array), miTest.$.principal.setEstadisticas("0/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas("0/" + numero_preguntas), carga_pregunta();
 }
 
-function carga_pregunta() {
-if (!nombre) return;
-if (num_pregs_control > 1) {
-var e = indice_control;
-while (e == indice_control) indice_control = Math.floor(Math.random() * num_pregs_control);
-num_preg = control[indice_control];
-} else miTest.$.preg_resp.setPregunta("");
-miTest.$.preg_resp.setPregunta(lista[num_preg]), miTest.$.preg_resp.setRespuesta(lista[num_preg + 1]), marcada = comprueba_marca(num_preg);
+function limpiar(e) {
+milog("limpiar"), nombre = "", numero_preguntas = 0, acertadas = 0, refresco(e);
 }
 
-function comprueba_marca(e) {
-for (var t = 0; t < marcas.length; t++) if (marcas[t] == e) return !0;
-return !1;
+// preferencias.js
+
+function inicio_getFS() {
+milog("inicio"), window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(e) {
+e.root.getDirectory("TxTest", {
+create: !0,
+exclusive: !1
+}, gotDIR, fallo_fs);
+}, fallo_fs);
 }
 
-function quita_marca(e) {
-var t;
-for (t = 0; t < marcas.length; t++) if (marcas[t] == e) break;
-marcas = marcas.slice(0, t).concat(marcas.slice(t + 1, marcas.length));
+function gotDIR(e) {
+milog("gotDIR"), dir_test = e, e.getFile("prefs.161", {
+create: !1
+}, function(t) {
+t.file(gotPREFS_read, function(t) {
+milog("sin acceso a prefs" + t.code), crea_prefs(e);
+});
+}, function(t) {
+milog("no encuentro prefs" + t.code), crea_prefs(e);
+}), carga_lista_inicial(e);
 }
 
-function valor_css(e, t) {
-var n = e.replace(/ /g, "").split(";");
-for (p in n) if (n[p].split(":")[0] == t) return n[p].split(":")[1];
+function gotPREFS_read(e) {
+milog("gotPREFS");
+var t = new FileReader;
+t.onloadend = function(e) {
+prefs = e.target.result.split("\n"), actualiza_pantalla_inicial();
+}, t.onerror = function(e) {
+milog("error leyendo prefs" + e.code), crea_prefs(direc);
+}, t.readAsText(e);
 }
 
-// d_opciones.js
+function actualiza_pantalla_inicial() {
+milog("actualiza_pantalla_inical"), miTest.setX_idioma(prefs[IDIOMA]), miTest.$.preg_resp.setX_actualizar(Math.random());
+}
 
+function crea_prefs(e) {
+milog("crea_prefs"), prefs_default(), e.getFile("prefs.161", {
+create: !0,
+exclusive: !0
+}, function(e) {
+e.createWriter(escribe_prefs, function(e) {
+milog("error accediendo a prefs" + e.code);
+});
+}, function(e) {
+milog("error creando prefs" + e.code);
+});
+}
 
-
-// d_preferencias.js
-
-function d_preferencias() {
-prefs_default(), d_carga_lista_inicial(), miTest.setX_idioma(prefs[IDIOMA]), miTest.$.preg_resp.setX_actualizar(Math.random());
+function escribe_prefs(e) {
+milog("escribe_prefs"), e.onerror = function(e) {
+milog("error escribiendo prefs" + e.code);
+}, e.write(prefs.join("\n"));
 }
 
 function grabar_preferencias() {}
 
-// d_listas.js
+// listas.js
 
-function d_carga_lista_inicial() {
-nombre = "Test", lista = [ "pregunta-1", "repuesta-1", "pregunta<br />2", "repuesta-2", "pregunta 3<ul><li>uno</li><li>dos</li><li>tres</li></ul>", "repuesta-3<ul><li>dos</li></ul>", "pregunta-4", "repuesta-4", "pregunta-5", "repuesta-5", "pregunta-5", "repuesta-5", "pregunta-5", "repuesta-5", "pregunta-5", "repuesta-5", "pregunta-5", "repuesta-5", "pregunta-5", "repuesta-5", "pregunta-5", "repuesta-5", "pregunta-5", "repuesta-5", "pregunta-6", "repuesta-6" ], miTest.$.principal.setLis_actual(nombre), miTest.$.preg_resp.setNom_lista(nombre), numero_preguntas = (lista.length - lista.length % 2) / 2, fbReseteo();
+function carga_lista_inicial(e) {
+milog("carga_lista_inicial"), e.getFile("ultima.161", {
+create: !1
+}, function(e) {
+e.file(gotUltima_read, function(e) {
+milog("sin acceso a ultima");
+});
+}, function(e) {
+milog("no encuentro ultima");
+});
+}
+
+function gotUltima_read(e) {
+milog("gotUltima_read");
+var t = new FileReader;
+t.onloadend = function(e) {
+ultima = e.target.result.split("\n")[0], milog("ultima: " + ultima), abre_lista(ultima);
+}, t.onerror = function(e) {
+milog("error abriendo " + ultima);
+}, t.readAsText(e);
+}
+
+function abre_lista(e) {
+milog("abre_lista"), nombre_prox = e.substring(0, e.length - 4), control = new Array, marcas = new Array, dir_test.getFile(e, {
+create: !1
+}, function(t) {
+t.file(gotLISTA_read, function(t) {
+milog("err " + t.code + " accediendo " + e);
+});
+}, function(t) {
+milog("err " + t.code + " obteniendo " + e);
+});
+}
+
+function gotLISTA_read(e) {
+milog("gotLISTA_read");
+var t = new FileReader;
+t.onloadend = function(t) {
+nombre = nombre_prox, miTest.$.principal.setLis_actual(nombre), miTest.$.preg_resp.setNom_lista(nombre), lista = t.target.result.split("\n"), tamano_actual = e.size, tamano = tamano_actual, milog("tamano_actual: " + tamano_actual), numero_preguntas = (lista.length - lista.length % 2) / 2, dir_test.getFile(nombre + ".tst", {
+create: !1
+}, function(e) {
+e.file(gotHistoria_read, function(e) {
+milog("code " + e.code + " accediendo .tst"), fbReseteo(!0);
+});
+}, function(e) {
+milog("code " + e.code + " obteniendo .tst"), fbReseteo(!0);
+});
+}, t.onerror = function(e) {
+milog("err " + e.code + " leyendo lista");
+}, t.readAsText(e);
+}
+
+function gotHistoria_read(e) {
+milog("gotHistoria_read");
+var t = new FileReader;
+t.onloadend = function(e) {
+var t = e.target.result.split("\n");
+t.length == 3 ? (milog("tama\u00f1o en .tst: " + tamano), t[0] == tamano_actual ? (tamano = t[0], control = t[1].split("|"), marcas = t[2].split("|"), numero_pregs_control = control.length, acertadas = numero_preguntas - numero_pregs_control, refresco(!0), miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas(acertadas + "/" + numero_preguntas)) : (milog("tama\u00f1os distintos"), fbReseteo(!0))) : (milog(".tst corrupto"), fbReseteo(!0));
+}, t.onerror = function(e) {
+milog("code " + e.code + " leyendo .tst"), fbReseteo(!0);
+}, t.readAsText(e);
 }
 
 function eleccion_lista() {
