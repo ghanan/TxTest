@@ -5440,7 +5440,13 @@ function prefs_default() {
 prefs[VERSION] = "1", prefs[IDIOMA] = "0", prefs[P_TXT_TAM] = 100, prefs[R_TXT_TAM] = 100, prefs[P_TXT_R] = 255, prefs[P_TXT_G] = 255, prefs[P_TXT_B] = 0, prefs[R_TXT_R] = 255, prefs[R_TXT_G] = 255, prefs[R_TXT_B] = 255, prefs[P_FON_R] = 25, prefs[P_FON_G] = 25, prefs[P_FON_B] = 112, prefs[R_FON_R] = 139, prefs[R_FON_G] = 79, prefs[R_FON_B] = 87;
 }
 
-var VERSION_ACTUAL = "1", logs = "", miTest, dir_test, H = window.innerHeight, W = window.innerWidth, W = document.documentElement.offsetWidth;
+var VERSION_ACTUAL = "1", logs = "", miTest, dir_test;
+
+logs = "variables";
+
+var H = window.innerHeight, W = window.innerWidth;
+
+logs = logs + " " + H;
 
 if (W < 241) var term = 1, p1p1 = 6; else if (W < 321) var term = 2, p1p1 = 12; else var term = 3, p1p1 = 12;
 
@@ -5589,7 +5595,7 @@ milog("gotHistoria_read");
 var t = new FileReader;
 t.onloadend = function(e) {
 var t = e.target.result.split("\n");
-t.length == 3 ? (milog("tama\u00f1o en .tst: " + tamano), t[0] == tamano_actual ? (tamano = t[0], control = t[1].split("|"), marcas = t[2].split("|"), numero_pregs_control = control.length, acertadas = numero_preguntas - numero_pregs_control, refresco(!0), miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas(acertadas + "/" + numero_preguntas)) : (milog("tama\u00f1os distintos"), fbReseteo(!0))) : (milog(".tst corrupto"), fbReseteo(!0));
+t.length == 3 ? (milog("tama\u00f1o en .tst: " + t[0]), t[0] == tamano_actual ? (tamano = t[0], control = t[1].split("|"), marcas = t[2].split("|"), numero_pregs_control = control.length, acertadas = numero_preguntas - numero_pregs_control, refresco(!0), miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas(acertadas + "/" + numero_preguntas)) : (milog("tama\u00f1os distintos"), fbReseteo(!0))) : (milog(".tst corrupto"), fbReseteo(!0));
 }, t.onerror = function(e) {
 milog("code " + e.code + " leyendo .tst"), fbReseteo(!0);
 }, t.readAsText(e);
