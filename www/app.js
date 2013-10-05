@@ -5461,7 +5461,7 @@ logs = logs + e + "<br />\n";
 }
 
 function fbReseteo(e) {
-control = new Array;
+milog("fbReseteo"), control = new Array;
 for (var t = 0; t < numero_preguntas; t++) control.push(t * 2);
 num_pregs_control = numero_preguntas, e && (e = new Array), miTest.$.principal.setEstadisticas("0/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas("0/" + numero_preguntas), carga_pregunta();
 }
@@ -5526,7 +5526,9 @@ milog("error escribiendo prefs" + e.code);
 }, e.write(prefs.join("\n"));
 }
 
-function grabar_preferencias() {}
+function grabar_preferencias() {
+milog("grabar_preferencias");
+}
 
 // listas.js
 
