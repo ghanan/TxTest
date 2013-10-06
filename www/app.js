@@ -4698,7 +4698,7 @@ autoDismiss: !0,
 allowHtml: !0
 } ],
 create: function() {
-this.inherited(arguments), this.$.bg1.setStyle("padding: " + p1p1 + "px"), this.$.bg2.setStyle("padding-left: " + p1p1 + "px; padding-right: " + p1p1 + "px"), this.$.b_estadisticas.setStyle("margin-right: 9px");
+this.inherited(arguments), W = screen.width, H = screen.height, p1p1 = W < 241 ? 6 : 12, this.$.bg1.setStyle("padding: " + p1p1 + "px"), this.$.bg2.setStyle("padding-left: " + p1p1 + "px; padding-right: " + p1p1 + "px"), this.$.b_estadisticas.setStyle("margin-right: 9px");
 var e = W - 2 * p1p1;
 H < 321 ? (this.$.acciones.setStyle("margin: " + p1p1 + "px; width: " + (W / 2 - 1.5 * p1p1) + "px;" + "height: " + 1.2 + "cm"), this.$.opciones.setStyle("margin-top: " + p1p1 + "px; width: " + (W / 2 - 1.5 * p1p1) + "px;" + "height: " + 1.2 + "cm")) : (this.$.acciones.setStyle("margin: " + p1p1 + "px; width: " + e + "px; height: 1.5cm"), this.$.opciones.setStyle("margin-left: " + p1p1 + "px; width: " + e + "px; height: 1.5cm"));
 },
