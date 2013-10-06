@@ -5440,13 +5440,7 @@ function prefs_default() {
 prefs[VERSION] = "1", prefs[IDIOMA] = "0", prefs[P_TXT_TAM] = 100, prefs[R_TXT_TAM] = 100, prefs[P_TXT_R] = 255, prefs[P_TXT_G] = 255, prefs[P_TXT_B] = 0, prefs[R_TXT_R] = 255, prefs[R_TXT_G] = 255, prefs[R_TXT_B] = 255, prefs[P_FON_R] = 25, prefs[P_FON_G] = 25, prefs[P_FON_B] = 112, prefs[R_FON_R] = 139, prefs[R_FON_G] = 79, prefs[R_FON_B] = 87;
 }
 
-var VERSION_ACTUAL = "1", logs = "", miTest, dir_test;
-
-logs = "variables";
-
-var H = window.innerHeight, W = window.innerWidth;
-
-logs = logs + " " + H;
+var VERSION_ACTUAL = "1", logs = "", miTest, dir_test, H = window.innerHeight, W = window.innerWidth, Hs = screen.height, Ws = screen.width;
 
 if (W < 241) var term = 1, p1p1 = 6; else if (W < 321) var term = 2, p1p1 = 12; else var term = 3, p1p1 = 12;
 
