@@ -4449,7 +4449,7 @@ name: "ingles",
 kind: "Ingles"
 } ],
 deviceReady: function(e, t) {
-inicio_getFS();
+W = screen.width, H = screen.height, this.log(W + "x" + H), inicio_getFS();
 },
 x_idiomaChanged: function() {
 this.$.principal.setX_idioma(this.x_idioma), this.$.preg_resp.setX_idioma(this.x_idioma), this.$.opciones.setX_idioma(this.x_idioma);
@@ -4698,7 +4698,7 @@ autoDismiss: !0,
 allowHtml: !0
 } ],
 create: function() {
-this.inherited(arguments), W = screen.width, H = screen.height, p1p1 = W < 241 ? 6 : 12, this.$.bg1.setStyle("padding: " + p1p1 + "px"), this.$.bg2.setStyle("padding-left: " + p1p1 + "px; padding-right: " + p1p1 + "px"), this.$.b_estadisticas.setStyle("margin-right: 9px");
+this.inherited(arguments), p1p1 = W < 241 ? 6 : 12, this.$.bg1.setStyle("padding: " + p1p1 + "px"), this.$.bg2.setStyle("padding-left: " + p1p1 + "px; padding-right: " + p1p1 + "px"), this.$.b_estadisticas.setStyle("margin-right: 9px");
 var e = W - 2 * p1p1;
 H < 321 ? (this.$.acciones.setStyle("margin: " + p1p1 + "px; width: " + (W / 2 - 1.5 * p1p1) + "px;" + "height: " + 1.2 + "cm"), this.$.opciones.setStyle("margin-top: " + p1p1 + "px; width: " + (W / 2 - 1.5 * p1p1) + "px;" + "height: " + 1.2 + "cm")) : (this.$.acciones.setStyle("margin: " + p1p1 + "px; width: " + e + "px; height: 1.5cm"), this.$.opciones.setStyle("margin-left: " + p1p1 + "px; width: " + e + "px; height: 1.5cm"));
 },
@@ -5440,7 +5440,7 @@ function prefs_default() {
 prefs[VERSION] = "1", prefs[IDIOMA] = "0", prefs[P_TXT_TAM] = 100, prefs[R_TXT_TAM] = 100, prefs[P_TXT_R] = 255, prefs[P_TXT_G] = 255, prefs[P_TXT_B] = 0, prefs[R_TXT_R] = 255, prefs[R_TXT_G] = 255, prefs[R_TXT_B] = 255, prefs[P_FON_R] = 25, prefs[P_FON_G] = 25, prefs[P_FON_B] = 112, prefs[R_FON_R] = 139, prefs[R_FON_G] = 79, prefs[R_FON_B] = 87;
 }
 
-var VERSION_ACTUAL = "1", logs = "", miTest, dir_test, H = window.innerHeight, W = window.innerWidth, Hs = screen.height, Ws = screen.width;
+var VERSION_ACTUAL = "1", logs = "", miTest, dir_test, H = window.innerHeight, W = window.innerWidth, H = screen.height, W = screen.width;
 
 if (W < 241) var term = 1, p1p1 = 6; else if (W < 321) var term = 2, p1p1 = 12; else var term = 3, p1p1 = 12;
 
@@ -5589,7 +5589,7 @@ milog("gotHistoria_read");
 var t = new FileReader;
 t.onloadend = function(e) {
 var t = e.target.result.split("\n");
-t.length == 3 ? (milog("tama\u00f1o en .tst: " + t[0]), t[0] == tamano_actual ? (tamano = t[0], control = t[1].split("|"), marcas = t[2].split("|"), numero_pregs_control = control.length, acertadas = numero_preguntas - numero_pregs_control, refresco(!0), miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas(acertadas + "/" + numero_preguntas)) : (milog("tama\u00f1os distintos"), fbReseteo(!0))) : (milog(".tst corrupto"), fbReseteo(!0));
+t.length == 3 ? (milog("tama\u00f1o en .tst: " + t[0]), t[0] == tamano_actual ? (tamano = t[0], control = t[1].split("|"), marcas = t[2].split("|"), numero_pregs_control = control.length, acertadas = numero_preguntas - numero_pregs_control, miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas(acertadas + "/" + numero_preguntas), refresco(!0)) : (milog("tama\u00f1os distintos"), fbReseteo(!0))) : (milog(".tst corrupto"), fbReseteo(!0));
 }, t.onerror = function(e) {
 milog("code " + e.code + " leyendo .tst"), fbReseteo(!0);
 }, t.readAsText(e);
