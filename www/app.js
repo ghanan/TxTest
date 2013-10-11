@@ -4449,7 +4449,7 @@ name: "ingles",
 kind: "Ingles"
 } ],
 deviceReady: function(e, t) {
-W = screen.width, H = screen.height, this.log(W + "x" + H), inicio_getFS();
+W = screen.width, H = screen.height, console.log(W + "x" + H), inicio_getFS();
 },
 x_idiomaChanged: function() {
 this.$.principal.setX_idioma(this.x_idioma), this.$.preg_resp.setX_idioma(this.x_idioma), this.$.opciones.setX_idioma(this.x_idioma);
@@ -5281,7 +5281,7 @@ create: function() {
 this.inherited(arguments), W > 400 && (this.$.b_aplicar.setStyle("height: 1.4cm; background-color: blue; font-size: 120%"), this.$.b_cancelar.setStyle("height: 1.4cm; background-color: red; font-size: 120%"), this.$.t_abajo.setStyle("height: 2cm"));
 },
 x_actualizaChanged: function() {
-this.nuevas_prefs.length = 0;
+alert("kk"), this.nuevas_prefs.length = 0;
 for (i in prefs) this.nuevas_prefs.push(prefs[i]);
 this.$.row_preg.setStyle("color: rgb(" + prefs[P_TXT_R] + "," + prefs[P_TXT_G] + "," + prefs[P_TXT_B] + "); background-color: rgb(" + prefs[P_FON_R] + "," + prefs[P_FON_G] + "," + prefs[P_FON_B] + ");"), this.$.p_preg_tam.setValue(prefs[P_TXT_TAM]), this.$.p_pc_r.setValue(prefs[P_TXT_R]), this.$.p_pc_g.setValue(prefs[P_TXT_G]), this.$.p_pc_b.setValue(prefs[P_TXT_B]), this.$.p_pf_r.setValue(prefs[P_FON_R]), this.$.p_pf_g.setValue(prefs[P_FON_G]), this.$.p_pf_b.setValue(prefs[P_FON_B]), this.$.row_resp.setStyle("color: rgb(" + prefs[R_TXT_R] + "," + prefs[R_TXT_G] + "," + prefs[R_TXT_B] + "); background-color: rgb(" + prefs[R_FON_R] + "," + prefs[R_FON_G] + "," + prefs[R_FON_B] + ");"), this.$.p_resp_tam.setValue(prefs[R_TXT_TAM]), this.$.p_rc_r.setValue(prefs[R_TXT_R]), this.$.p_rc_g.setValue(prefs[R_TXT_G]), this.$.p_rc_b.setValue(prefs[R_TXT_B]), this.$.p_rf_r.setValue(prefs[R_FON_R]), this.$.p_rf_g.setValue(prefs[R_FON_G]), this.$.p_rf_b.setValue(prefs[R_FON_B]);
 },
@@ -5440,11 +5440,7 @@ function prefs_default() {
 prefs[VERSION] = "1", prefs[IDIOMA] = "0", prefs[P_TXT_TAM] = 100, prefs[R_TXT_TAM] = 100, prefs[P_TXT_R] = 255, prefs[P_TXT_G] = 255, prefs[P_TXT_B] = 0, prefs[R_TXT_R] = 255, prefs[R_TXT_G] = 255, prefs[R_TXT_B] = 255, prefs[P_FON_R] = 25, prefs[P_FON_G] = 25, prefs[P_FON_B] = 112, prefs[R_FON_R] = 139, prefs[R_FON_G] = 79, prefs[R_FON_B] = 87;
 }
 
-var VERSION_ACTUAL = "1", logs = "", miTest, dir_test, H = window.innerHeight, W = window.innerWidth, H = screen.height, W = screen.width;
-
-if (W < 241) var term = 1, p1p1 = 6; else if (W < 321) var term = 2, p1p1 = 12; else var term = 3, p1p1 = 12;
-
-var marcada = !1, nombre = "", nombre_prox = "", ultima = "", tamano = 0, tamano_actual = 0, numero_preguntas = 0, lista = new Array, num_preg = 0, acertadas = 0, control = new Array, marcas = new Array, indice_control = 0, num_pregs_control = 0, m1 = [ [ "Si", "Salir", "Preferencias", "Cancelar", "Grabar", "Aplicar", "No", "Si" ], [ "Yes", "Exit", "Preferences", "Cancel", "Save", "Apply", "No", "Ok" ] ], m2 = [ [ "DISPONIBLES", "LISTA ACTUAL", "Marcadas", "Empezar", "\u00bfReiniciar acertadas?" ], [ "AVAILABLE", "CURRENT LIST", "Marked", "Start", "Reset corrects?" ] ], m3 = [ [ "N\u00fam. marcas", "Desmarcar", "Fichero con marcadas", "Borrar marcadas", "Quitar todas las marcas" ], [ "Num. marks", "Unmark", "Marked to file", "Remove marked", "Remove all marks" ] ], m4 = [ [ "Nombre del fichero", "Eliminar preguntas", "Volver", "Respuesta", "Marcar", "Desmarcar" ], [ "File name", "Remove questions", "Back", "Answer", "Mark", "Unmark" ] ], m5 = [ [ "PREGUNTA", "RESPUESTA", "Tama\u00f1o de letra", "Fondo" ], [ "QUESTION", "ANSWER", "Font size", "Background" ] ], ay = [ [ "<br />Toca en DISPONIBLES para elegir lista<br /><br />Toca en nn/nn para reiniciar acertadas<br />Formato de los ficheros " ], [ "<br />Tap on AVAILABLES to choose list<br /><br />Tap on nn/nn to reset corrects" ] ], ii = [ "<br /><br />----<br /><br />Antonio Tovar<br />antovar@260mb.com<br /><br />" ], prefs = new Array, VERSION = 0, IDIOMA = 1, P_TXT_TAM = 2, R_TXT_TAM = 3, P_TXT_R = 4, P_TXT_G = 5, P_TXT_B = 6, R_TXT_R = 7, R_TXT_G = 8, R_TXT_B = 9, P_FON_R = 10, P_FON_G = 11, P_FON_B = 12, R_FON_R = 13, R_FON_G = 14, R_FON_B = 15;
+var VERSION_ACTUAL = "1", logs = "", miTest, dir_test, H, W, marcada = !1, nombre = "", nombre_prox = "", ultima = "", tamano = 0, tamano_actual = 0, numero_preguntas = 0, lista = new Array, num_preg = 0, acertadas = 0, control = new Array, marcas = new Array, indice_control = 0, num_pregs_control = 0, m1 = [ [ "Si", "Salir", "Preferencias", "Cancelar", "Grabar", "Aplicar", "No", "Si" ], [ "Yes", "Exit", "Preferences", "Cancel", "Save", "Apply", "No", "Ok" ] ], m2 = [ [ "DISPONIBLES", "LISTA ACTUAL", "Marcadas", "Empezar", "\u00bfReiniciar acertadas?" ], [ "AVAILABLE", "CURRENT LIST", "Marked", "Start", "Reset corrects?" ] ], m3 = [ [ "N\u00fam. marcas", "Desmarcar", "Fichero con marcadas", "Borrar marcadas", "Quitar todas las marcas" ], [ "Num. marks", "Unmark", "Marked to file", "Remove marked", "Remove all marks" ] ], m4 = [ [ "Nombre del fichero", "Eliminar preguntas", "Volver", "Respuesta", "Marcar", "Desmarcar" ], [ "File name", "Remove questions", "Back", "Answer", "Mark", "Unmark" ] ], m5 = [ [ "PREGUNTA", "RESPUESTA", "Tama\u00f1o de letra", "Fondo" ], [ "QUESTION", "ANSWER", "Font size", "Background" ] ], ay = [ [ "<br />Toca en DISPONIBLES para elegir lista<br /><br />Toca en nn/nn para reiniciar acertadas<br />Formato de los ficheros " ], [ "<br />Tap on AVAILABLES to choose list<br /><br />Tap on nn/nn to reset corrects" ] ], ii = [ "<br /><br />----<br /><br />Antonio Tovar<br />antovar@260mb.com<br /><br />" ], prefs = new Array, VERSION = 0, IDIOMA = 1, P_TXT_TAM = 2, R_TXT_TAM = 3, P_TXT_R = 4, P_TXT_G = 5, P_TXT_B = 6, R_TXT_R = 7, R_TXT_G = 8, R_TXT_B = 9, P_FON_R = 10, P_FON_G = 11, P_FON_B = 12, R_FON_R = 13, R_FON_G = 14, R_FON_B = 15;
 
 // funciones.js
 
