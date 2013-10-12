@@ -5117,6 +5117,7 @@ name: "p_pf_r",
 kind: "onyx.IntegerPicker",
 min: 0,
 max: 255,
+value: 0,
 onChange: "fp_pf_rgb"
 } ]
 }, {
@@ -5283,7 +5284,7 @@ this.inherited(arguments), W > 400 && (this.$.b_aplicar.setStyle("height: 1.4cm;
 x_actualizaChanged: function() {
 this.nuevas_prefs.length = 0;
 for (i in prefs) this.nuevas_prefs.push(prefs[i]);
-this.$.row_preg.setStyle("color: rgb(" + prefs[P_TXT_R] + "," + prefs[P_TXT_G] + "," + prefs[P_TXT_B] + "); background-color: rgb(" + prefs[P_FON_R] + "," + prefs[P_FON_G] + "," + prefs[P_FON_B] + ");"), this.$.p_preg_tam.setValue(prefs[P_TXT_TAM]), this.$.p_pc_r.setValue(prefs[P_TXT_R]), this.$.p_pc_g.setValue(prefs[P_TXT_G]), this.$.p_pc_b.setValue(prefs[P_TXT_B]), this.$.p_pf_r.setValue(prefs[P_FON_R]), this.$.p_pf_g.setValue(prefs[P_FON_G]), this.$.p_pf_b.setValue(prefs[P_FON_B]), this.$.row_resp.setStyle("color: rgb(" + prefs[R_TXT_R] + "," + prefs[R_TXT_G] + "," + prefs[R_TXT_B] + "); background-color: rgb(" + prefs[R_FON_R] + "," + prefs[R_FON_G] + "," + prefs[R_FON_B] + ");"), this.$.p_resp_tam.setValue(prefs[R_TXT_TAM]), this.$.p_rc_r.setValue(prefs[R_TXT_R]), this.$.p_rc_g.setValue(prefs[R_TXT_G]), this.$.p_rc_b.setValue(prefs[R_TXT_B]), this.$.p_rf_r.setValue(prefs[R_FON_R]), this.$.p_rf_g.setValue(prefs[R_FON_G]), this.$.p_rf_b.setValue(prefs[R_FON_B]), this.$.row_preg.reflow();
+this.$.row_preg.setStyle("color: rgb(" + prefs[P_TXT_R] + "," + prefs[P_TXT_G] + "," + prefs[P_TXT_B] + "); background-color: rgb(" + prefs[P_FON_R] + "," + prefs[P_FON_G] + "," + prefs[P_FON_B] + ");"), this.$.p_preg_tam.setValue(prefs[P_TXT_TAM]), this.$.p_pc_r.setValue(prefs[P_TXT_R]), this.$.p_pc_g.setValue(prefs[P_TXT_G]), this.$.p_pc_b.setValue(prefs[P_TXT_B]), this.$.p_pf_r.setValue(prefs[P_FON_R]), this.$.p_pf_g.setValue(prefs[P_FON_G]), this.$.p_pf_b.setValue(prefs[P_FON_B]), this.$.row_resp.setStyle("color: rgb(" + prefs[R_TXT_R] + "," + prefs[R_TXT_G] + "," + prefs[R_TXT_B] + "); background-color: rgb(" + prefs[R_FON_R] + "," + prefs[R_FON_G] + "," + prefs[R_FON_B] + ");"), this.$.p_resp_tam.setValue(prefs[R_TXT_TAM]), this.$.p_rc_r.setValue(prefs[R_TXT_R]), this.$.p_rc_g.setValue(prefs[R_TXT_G]), this.$.p_rc_b.setValue(prefs[R_TXT_B]), this.$.p_rf_r.setValue(prefs[R_FON_R]), this.$.p_rf_g.setValue(prefs[R_FON_G]), this.$.p_rf_b.setValue(prefs[R_FON_B]);
 },
 x_idiomaChanged: function() {
 this.$.r_opciones.setContent(m1[this.nuevas_prefs[IDIOMA]][2]), this.$.r_pregunta.setContent(m5[this.nuevas_prefs[IDIOMA]][0]), this.$.r_respuesta.setContent(m5[this.nuevas_prefs[IDIOMA]][1]), this.$.r_preg_tam.setContent(m5[this.nuevas_prefs[IDIOMA]][2]), this.$.r_resp_tam.setContent(m5[this.nuevas_prefs[IDIOMA]][2]), this.$.r_preg_fon.setContent(m5[this.nuevas_prefs[IDIOMA]][3]), this.$.r_resp_fon.setContent(m5[this.nuevas_prefs[IDIOMA]][3]);
