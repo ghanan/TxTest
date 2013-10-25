@@ -5462,6 +5462,21 @@ for (var t = 0; t < numero_preguntas; t++) control.push(t * 2);
 num_pregs_control = numero_preguntas, acertadas = 0, e && (e = new Array), miTest.$.principal.setEstadisticas("0/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas("0/" + numero_preguntas), carga_pregunta();
 }
 
+function carga_pregunta() {
+if (!nombre) return;
+if (num_pregs_control > 1) {
+var e = indice_control;
+while (e == indice_control) indice_control = Math.floor(Math.random() * num_pregs_control);
+num_preg = control[indice_control];
+} else miTest.$.preg_resp.setPregunta("");
+miTest.$.preg_resp.setPregunta(lista[num_preg]), miTest.$.preg_resp.setRespuesta(lista[num_preg + 1]), marcada = comprueba_marca(num_preg);
+}
+
+function comprueba_marca(e) {
+for (var t = 0; t < marcas.length; t++) if (marcas[t] == e) return !0;
+return !1;
+}
+
 function limpiar(e) {
 milog("limpiar"), nombre = "", numero_preguntas = 0, acertadas = 0, refresco(e);
 }
