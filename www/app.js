@@ -4725,7 +4725,7 @@ fb_empezar: function() {
 this.$.b_estadisticas.setStyle("margin-right: 0px"), miTest.$.principal.getLis_actual && num_pregs_control != 0 && miTest.setIndex(1);
 },
 fb_reset_sn: function(e) {
-e == this.$.b_si && fbReseteo(!1), this.$.reset_sn.hide();
+this.log("a"), e == this.$.b_si && fbReseteo(!1), this.log("b"), this.$.reset_sn.hide();
 },
 elige_lista: function() {
 this.$.b_estadisticas.setStyle("margin-right: 0px"), eleccion_lista();
@@ -4925,7 +4925,7 @@ fb_error: function(e) {
 this.$.b_correcto.setFit(!1), this.$.b_correcto.hide(), this.$.b_error.hide(), this.$.b_marcar.hide(), this.$.b_respuesta.show(), this.$.b_volver.show(), this.$.b_respuesta.setFit(!0), this.$.botones.reflow(), carga_pregunta();
 },
 fb_reset_sn: function(e) {
-e == this.$.b_si && (this.fb_error(), fbReseteo(!1), this.$.b_estadisticas.setContent("0/" + numero_preguntas)), this.$.reset_sn.hide();
+this.log(1), e == this.$.b_si && (this.log(2), this.fb_error(), this.log(3), fbReseteo(!1), this.log(4), this.$.b_estadisticas.setContent("0/" + numero_preguntas)), this.log(5), this.$.reset_sn.hide();
 }
 });
 
@@ -5283,7 +5283,7 @@ this.inherited(arguments), W > 400 && (this.$.b_aplicar.setStyle("height: 1.4cm;
 x_actualizaChanged: function() {
 this.nuevas_prefs.length = 0;
 for (i in prefs) this.nuevas_prefs.push(prefs[i]);
-this.$.row_preg.setStyle("color: rgb(" + prefs[P_TXT_R] + "," + prefs[P_TXT_G] + "," + prefs[P_TXT_B] + "); background-color: rgb(" + prefs[P_FON_R] + "," + prefs[P_FON_G] + "," + prefs[P_FON_B] + ");"), this.$.p_preg_tam.setValue(prefs[P_TXT_TAM]), this.$.p_pc_r.setValue(prefs[P_TXT_R]), alert(this.$.p_pc_r.selected), this.$.p_pc_g.setValue(prefs[P_TXT_G]), this.$.p_pc_b.setValue(prefs[P_TXT_B]), this.$.p_pf_r.setValue(prefs[P_FON_R]), this.$.p_pf_g.setValue(prefs[P_FON_G]), this.$.p_pf_b.setValue(prefs[P_FON_B]), this.$.row_resp.setStyle("color: rgb(" + prefs[R_TXT_R] + "," + prefs[R_TXT_G] + "," + prefs[R_TXT_B] + "); background-color: rgb(" + prefs[R_FON_R] + "," + prefs[R_FON_G] + "," + prefs[R_FON_B] + ");"), this.$.p_resp_tam.setValue(prefs[R_TXT_TAM]), this.$.p_rc_r.setValue(prefs[R_TXT_R]), this.$.p_rc_g.setValue(prefs[R_TXT_G]), this.$.p_rc_b.setValue(prefs[R_TXT_B]), this.$.p_rf_r.setValue(prefs[R_FON_R]), this.$.p_rf_g.setValue(prefs[R_FON_G]), this.$.p_rf_b.setValue(prefs[R_FON_B]);
+this.$.row_preg.setStyle("color: rgb(" + prefs[P_TXT_R] + "," + prefs[P_TXT_G] + "," + prefs[P_TXT_B] + "); background-color: rgb(" + prefs[P_FON_R] + "," + prefs[P_FON_G] + "," + prefs[P_FON_B] + ");"), this.$.p_preg_tam.setValue(prefs[P_TXT_TAM]), this.$.p_pc_r.setValue(prefs[P_TXT_R]), this.$.p_pc_g.setValue(prefs[P_TXT_G]), this.$.p_pc_b.setValue(prefs[P_TXT_B]), this.$.p_pf_r.setValue(prefs[P_FON_R]), this.$.p_pf_g.setValue(prefs[P_FON_G]), this.$.p_pf_b.setValue(prefs[P_FON_B]), this.$.row_resp.setStyle("color: rgb(" + prefs[R_TXT_R] + "," + prefs[R_TXT_G] + "," + prefs[R_TXT_B] + "); background-color: rgb(" + prefs[R_FON_R] + "," + prefs[R_FON_G] + "," + prefs[R_FON_B] + ");"), this.$.p_resp_tam.setValue(prefs[R_TXT_TAM]), this.$.p_rc_r.setValue(prefs[R_TXT_R]), this.$.p_rc_g.setValue(prefs[R_TXT_G]), this.$.p_rc_b.setValue(prefs[R_TXT_B]), this.$.p_rf_r.setValue(prefs[R_FON_R]), this.$.p_rf_g.setValue(prefs[R_FON_G]), this.$.p_rf_b.setValue(prefs[R_FON_B]);
 },
 x_idiomaChanged: function() {
 this.$.r_opciones.setContent(m1[this.nuevas_prefs[IDIOMA]][2]), this.$.r_pregunta.setContent(m5[this.nuevas_prefs[IDIOMA]][0]), this.$.r_respuesta.setContent(m5[this.nuevas_prefs[IDIOMA]][1]), this.$.r_preg_tam.setContent(m5[this.nuevas_prefs[IDIOMA]][2]), this.$.r_resp_tam.setContent(m5[this.nuevas_prefs[IDIOMA]][2]), this.$.r_preg_fon.setContent(m5[this.nuevas_prefs[IDIOMA]][3]), this.$.r_resp_fon.setContent(m5[this.nuevas_prefs[IDIOMA]][3]);
@@ -5459,7 +5459,7 @@ logs = logs + e + "<br />\n";
 function fbReseteo(e) {
 milog("fbReseteo"), control = new Array;
 for (var t = 0; t < numero_preguntas; t++) control.push(t * 2);
-num_pregs_control = numero_preguntas, e && (e = new Array), miTest.$.principal.setEstadisticas("0/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas("0/" + numero_preguntas), carga_pregunta();
+num_pregs_control = numero_preguntas, acertadas = 0, e && (e = new Array), miTest.$.principal.setEstadisticas("0/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas("0/" + numero_preguntas), carga_pregunta();
 }
 
 function limpiar(e) {
