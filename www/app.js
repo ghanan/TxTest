@@ -4725,7 +4725,7 @@ fb_empezar: function() {
 this.$.b_estadisticas.setStyle("margin-right: 0px"), miTest.$.principal.getLis_actual && num_pregs_control != 0 && miTest.setIndex(1);
 },
 fb_reset_sn: function(e) {
-this.log("a"), e == this.$.b_si && fbReseteo(!1), this.log("b"), this.$.reset_sn.hide();
+e == this.$.b_si && fbReseteo(!1), this.$.reset_sn.hide();
 },
 elige_lista: function() {
 this.$.b_estadisticas.setStyle("margin-right: 0px"), eleccion_lista();
@@ -4922,10 +4922,10 @@ fb_correcto: function() {
 this.$.b_correcto.setFit(!1), this.$.b_correcto.hide(), this.$.b_error.hide(), this.$.b_marcar.hide(), this.$.b_respuesta.show(), this.$.b_volver.show(), this.$.b_respuesta.setFit(!0), this.$.botones.reflow(), control = control.slice(0, indice_control).concat(control.slice(indice_control + 1, num_pregs_control)), num_pregs_control--, acertadas++, miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), this.$.b_estadisticas.setContent(acertadas + "/" + numero_preguntas), num_pregs_control != 0 ? carga_pregunta() : miTest.setIndex(0);
 },
 fb_error: function(e) {
-this.log(1), this.$.b_correcto.setFit(!1), this.$.b_correcto.hide(), this.$.b_error.hide(), this.$.b_marcar.hide(), this.$.b_respuesta.show(), this.$.b_volver.show(), this.$.b_respuesta.setFit(!0), this.$.botones.reflow(), this.log(2), carga_pregunta(), this.log(3);
+this.$.b_correcto.setFit(!1), this.$.b_correcto.hide(), this.$.b_error.hide(), this.$.b_marcar.hide(), this.$.b_respuesta.show(), this.$.b_volver.show(), this.$.b_respuesta.setFit(!0), this.$.botones.reflow(), carga_pregunta();
 },
 fb_reset_sn: function(e) {
-this.log(1), e == this.$.b_si && (this.log(2), this.fb_error(), this.log(3), fbReseteo(!1), this.log(4), this.$.b_estadisticas.setContent("0/" + numero_preguntas)), this.log(5), this.$.reset_sn.hide();
+e == this.$.b_si && (this.fb_error(), fbReseteo(!1), this.$.b_estadisticas.setContent("0/" + numero_preguntas)), this.$.reset_sn.hide();
 }
 });
 
