@@ -5600,7 +5600,7 @@ milog("gotHistoria_read");
 var t = new FileReader;
 t.onloadend = function(e) {
 var t = e.target.result.split("\n");
-t.length == 3 ? (milog("tama\u00f1o en .tst: " + t[0]), t[0] == tamano_actual ? (tamano = t[0], control = t[1].split("|"), marcas = t[2].split("|"), numero_pregs_control = control.length, acertadas = numero_preguntas - numero_pregs_control, miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas(acertadas + "/" + numero_preguntas), refresco(!0)) : (milog("tama\u00f1os distintos"), fbReseteo(!0))) : (milog(".tst corrupto"), fbReseteo(!0));
+t.length == 3 ? (milog("tama\u00f1o en .tst: " + t[0]), t[0] == tamano_actual ? (tamano = t[0], control = t[1].split("|"), marcas = t[2].split("|"), num_pregs_control = control.length, acertadas = numero_preguntas - num_pregs_control, miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas(acertadas + "/" + numero_preguntas), refresco(!0)) : (milog("tama\u00f1os distintos"), fbReseteo(!0))) : (milog(".tst corrupto"), fbReseteo(!0));
 }, t.onerror = function(e) {
 milog("code " + e.code + " leyendo .tst"), fbReseteo(!0);
 }, t.readAsText(e);
