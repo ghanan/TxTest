@@ -5463,14 +5463,13 @@ num_pregs_control = numero_preguntas, acertadas = 0, e && (e = new Array), miTes
 }
 
 function carga_pregunta() {
-milog("carga_pregunta"), this.log(1);
+milog("carga_pregunta"), milog("nombre " + nombre);
 if (!nombre) return;
-this.log(2);
+milog("num_pregs_control " + num_pregs_control);
 if (num_pregs_control > 1) {
-this.log(3);
 var e = indice_control;
 while (e == indice_control) indice_control = Math.floor(Math.random() * num_pregs_control);
-this.log(control[indice_control]), num_preg = control[indice_control], this.log(num_preg);
+milog("control[indice_control] " + control[indice_control]), num_preg = control[indice_control], milog("num_preg " + num_preg), this.log(num_preg);
 } else miTest.$.preg_resp.setPregunta("");
 miTest.$.preg_resp.setPregunta(lista[num_preg]), miTest.$.preg_resp.setRespuesta(lista[num_preg + 1]), marcada = comprueba_marca(num_preg);
 }
