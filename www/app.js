@@ -5466,12 +5466,11 @@ function carga_pregunta() {
 milog("carga_pregunta"), milog("nombre " + nombre);
 if (!nombre) return;
 milog("num_pregs_control " + num_pregs_control);
-if (num_pregs_control > 1) {
+if (num_pregs_control) {
 var e = indice_control;
 while (e == indice_control) indice_control = Math.floor(Math.random() * num_pregs_control);
-milog("control[indice_control] " + control[indice_control]), num_preg = control[indice_control], milog("num_preg " + num_preg);
+milog("control[indice_control] " + control[indice_control]), num_preg = control[indice_control], milog("num_preg " + num_preg), miTest.$.preg_resp.setPregunta(lista[num_preg]), miTest.$.preg_resp.setRespuesta(lista[num_preg + 1]), marcada = comprueba_marca(num_preg);
 } else miTest.$.preg_resp.setPregunta("");
-miTest.$.preg_resp.setPregunta(lista[num_preg]), miTest.$.preg_resp.setRespuesta(lista[num_preg + 1]), marcada = comprueba_marca(num_preg);
 }
 
 function comprueba_marca(e) {
