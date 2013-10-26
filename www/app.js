@@ -4901,7 +4901,10 @@ estadisticasChanged: function() {
 this.$.b_estadisticas.setContent(this.estadisticas);
 },
 preguntaChanged: function() {
-milog("kk " + this.pregunta), milog("kk " + this.respuesta), this.$.t_pregunta.setContent(this.pregunta), this.$.t_respuesta.setContent("");
+milog("pregChan " + this.pregunta), this.$.t_pregunta.setContent(this.pregunta), this.$.t_respuesta.setContent("");
+},
+respuestaChanged: function() {
+milog("respCh " + this.respuesta);
 },
 x_actualizarChanged: function() {
 this.$.t_pregunta.setStyle("color: rgb(" + prefs[P_TXT_R] + "," + prefs[P_TXT_G] + "," + prefs[P_TXT_B] + "); background-color: rgb(" + prefs[P_FON_R] + "," + prefs[P_FON_G] + "," + prefs[P_FON_B] + "); height: 50%; font-size: " + prefs[P_TXT_TAM] + "%"), this.$.t_respuesta.setStyle("color: rgb(" + prefs[R_TXT_R] + "," + prefs[R_TXT_G] + "," + prefs[R_TXT_B] + "); background-color: rgb(" + prefs[R_FON_R] + "," + prefs[R_FON_G] + "," + prefs[R_FON_B] + "); height: 50%; font-size: " + prefs[R_TXT_TAM] + "%");
