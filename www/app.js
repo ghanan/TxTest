@@ -5469,7 +5469,7 @@ milog("num_pregs_control " + num_pregs_control);
 if (num_pregs_control > 1) {
 var e = indice_control;
 while (e == indice_control) indice_control = Math.floor(Math.random() * num_pregs_control);
-milog("control[indice_control] " + control[indice_control]), num_preg = control[indice_control], milog("num_preg " + num_preg), this.log(num_preg);
+milog("control[indice_control] " + control[indice_control]), num_preg = control[indice_control], milog("num_preg " + num_preg);
 } else miTest.$.preg_resp.setPregunta("");
 miTest.$.preg_resp.setPregunta(lista[num_preg]), miTest.$.preg_resp.setRespuesta(lista[num_preg + 1]), marcada = comprueba_marca(num_preg);
 }
@@ -5602,7 +5602,7 @@ milog("gotHistoria_read");
 var t = new FileReader;
 t.onloadend = function(e) {
 var t = e.target.result.split("\n");
-t.length == 3 ? (milog("tama\u00f1o en .tst: " + t[0]), t[0] == tamano_actual ? (tamano = t[0], control = t[1].split("|"), marcas = t[2].split("|"), num_pregs_control = control.length, acertadas = numero_preguntas - num_pregs_control, miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas(acertadas + "/" + numero_preguntas), carga_pregunta()) : (milog("tama\u00f1os distintos"), fbReseteo(!0))) : (milog(".tst corrupto"), fbReseteo(!0));
+milog("history.length" + t.length), t.length == 3 ? (milog("tama\u00f1o en .tst: " + t[0]), t[0] == tamano_actual ? (tamano = t[0], control = t[1].split("|"), marcas = t[2].split("|"), num_pregs_control = control.length, acertadas = numero_preguntas - num_pregs_control, miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas(acertadas + "/" + numero_preguntas), carga_pregunta()) : (milog("tama\u00f1os distintos"), fbReseteo(!0))) : (milog(".tst corrupto"), fbReseteo(!0));
 }, t.onerror = function(e) {
 milog("code " + e.code + " leyendo .tst"), fbReseteo(!0);
 }, t.readAsText(e);
