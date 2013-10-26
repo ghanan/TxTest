@@ -5463,7 +5463,9 @@ num_pregs_control = numero_preguntas, acertadas = 0, e && (e = new Array), miTes
 }
 
 function carga_pregunta() {
+milog("carga_pregunta"), this.log();
 if (!nombre) return;
+this.log();
 if (num_pregs_control > 1) {
 var e = indice_control;
 while (e == indice_control) indice_control = Math.floor(Math.random() * num_pregs_control);
