@@ -5485,7 +5485,7 @@ milog("limpiar"), nombre = "", numero_preguntas = 0, acertadas = 0;
 function salvar_estado() {
 milog("salvar_estado"), direc.getFile(nombre + ".tst", {
 create: !0,
-exclusive: !0
+exclusive: !1
 }, function(e) {
 e.createWriter(escribe_estado, function(e) {
 milog("error accediendo a " + nombre + ".tst " + e.code);
