@@ -4762,7 +4762,7 @@ ayuda: function(e, t) {
 this.log(this.x_idioma), this.log(this.x_idioma - 0 + 4), miTest.setIndex(this.x_idioma - 0 + 4);
 },
 fb_salir: function() {
-salvar_estado(), navigator.app.exitApp();
+salvar_estado();
 }
 });
 
@@ -5483,7 +5483,7 @@ milog("limpiar"), nombre = "", numero_preguntas = 0, acertadas = 0;
 }
 
 function salvar_estado() {
-direc.getFile(nombre + ".tst", {
+milog("salvar_estado"), direc.getFile(nombre + ".tst", {
 create: !0,
 exclusive: !0
 }, function(e) {
@@ -5496,9 +5496,9 @@ milog("error creando " + nombre + ".tst " + e.code);
 }
 
 function escribe_estado(e) {
-e.onerror = function(e) {
+milog("escribe_estado"), e.onerror = function(e) {
 milog("error escribiendo " + nombre + ".tst " + e.code);
-}, e.write(tamano_actual + "\n" + control.join("|") + "\n" + marcas.join("|"));
+}, milog(tamano_actual + "\n" + control.join("|") + "\n" + marcas.join("|")), e.write(tamano_actual + "\n" + control.join("|") + "\n" + marcas.join("|"));
 }
 
 // preferencias.js
