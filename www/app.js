@@ -4762,7 +4762,7 @@ ayuda: function(e, t) {
 this.log(this.x_idioma), this.log(this.x_idioma - 0 + 4), miTest.setIndex(this.x_idioma - 0 + 4);
 },
 fb_salir: function() {
-salvar_estado();
+salvar_estado(), navigator.app.exitApp();
 }
 });
 
@@ -5483,7 +5483,7 @@ milog("limpiar"), nombre = "", numero_preguntas = 0, acertadas = 0;
 }
 
 function salvar_estado() {
-milog("salvar_estado " + dir_test), dir_test.getFile(nombre + ".tst", {
+dir_test.getFile(nombre + ".tst", {
 create: !0,
 exclusive: !1
 }, function(e) {
@@ -5496,7 +5496,7 @@ milog("error creando " + nombre + ".tst " + e.code);
 }
 
 function escribe_estado(e) {
-milog("escribe_estado"), e.onerror = function(e) {
+e.onerror = function(e) {
 milog("error escribiendo " + nombre + ".tst " + e.code);
 }, milog(tamano_actual + "\n" + control.join("|") + "\n" + marcas.join("|")), e.write(tamano_actual + "\n" + control.join("|") + "\n" + marcas.join("|"));
 }
