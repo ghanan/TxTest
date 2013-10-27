@@ -5483,7 +5483,7 @@ milog("limpiar"), nombre = "", numero_preguntas = 0, acertadas = 0;
 }
 
 function salvar_estado() {
-milog("salvar_estado " + direc), direc.getFile(nombre + ".tst", {
+milog("salvar_estado " + dir_test), dir_test.getFile(nombre + ".tst", {
 create: !0,
 exclusive: !1
 }, function(e) {
