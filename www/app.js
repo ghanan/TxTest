@@ -5495,7 +5495,7 @@ milog("error creando " + nombre + ".tst " + e.code);
 });
 }
 
-function escribe_prefs(e) {
+function escribe_estado(e) {
 e.onerror = function(e) {
 milog("error escribiendo " + nombre + ".tst " + e.code);
 }, e.write(tamano_actual + "\n" + control.join("|") + "\n" + marcas.join("|"));
