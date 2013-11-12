@@ -4969,13 +4969,13 @@ style: "text-align: right; font-size: smaller"
 } ]
 } ],
 listasChanged: function() {
-this.$.tabla.setCount(listas.length), this.$.tabla.reset(), miTest.setIndex(2);
+this.$.tabla.setCount(this.listas.length), this.$.tabla.reset(), miTest.setIndex(2);
 },
 setup_item: function(e, t) {
-return this.$.nom_lista.setContent(listas[t.index].split("|")[0]), this.$.estad.setContent(listas[t.index].split("|")[1]), !0;
+return this.$.nom_lista.setContent(this.listas[t.index].split("|")[0]), this.$.estad.setContent(this.listas[t.index].split("|")[1]), !0;
 },
 i_tap: function(e, t) {
-return t.index >= 0 && this.log(t.index), miTest.setIndex(0), !0;
+return nombre != this.listas[t.index].split("|")[0] ? (salvar_estado(), abre_lista(this.listas[t.index].split("|")[0] + ".txt")) : alert("es la misma"), miTest.setIndex(0), !0;
 }
 });
 
@@ -5501,6 +5501,25 @@ milog("error escribiendo " + nombre + ".tst " + e.code);
 }, milog(tamano_actual + "\n" + control.join("|") + "\n" + marcas.join("|")), e.write(tamano_actual + "\n" + control.join("|") + "\n" + marcas.join("|"));
 }
 
+function salva_ultima(e) {
+dir_test.getFile("ultima.161", {
+create: !0,
+exclusive: !1
+}, function(e) {
+e.createWriter(escribe_ultima, function(e) {
+milog("error accediendo a ultima.161 " + e.code);
+});
+}, function(e) {
+milog("error creando ultima.161 " + e.code);
+});
+}
+
+function escribe_ultima(e) {
+e.onerror = function(e) {
+milog("error escribiendo ultima.161 " + e.code);
+}, e.write(nombre + ".txt");
+}
+
 // preferencias.js
 
 function inicio_getFS() {
@@ -5601,7 +5620,7 @@ function gotLISTA_read(e) {
 milog("gotLISTA_read");
 var t = new FileReader;
 t.onloadend = function(t) {
-nombre = nombre_prox, miTest.$.principal.setLis_actual(nombre), miTest.$.preg_resp.setNom_lista(nombre), lista = t.target.result.split("\n"), tamano_actual = e.size, milog("tamano_actual: " + tamano_actual), numero_preguntas = (lista.length - lista.length % 2) / 2, dir_test.getFile(nombre + ".tst", {
+nombre = nombre_prox, miTest.$.principal.setLis_actual(nombre), miTest.$.preg_resp.setNom_lista(nombre), lista = t.target.result.split("\n"), tamano_actual = e.size, milog("tamano_actual: " + tamano_actual), numero_preguntas = (lista.length - lista.length % 2) / 2, nombre + ".txt" != ultima && salva_ultima(), dir_test.getFile(nombre + ".tst", {
 create: !1
 }, function(e) {
 e.file(gotHistoria_read, function(e) {
@@ -5620,14 +5639,28 @@ milog("gotHistoria_read");
 var t = new FileReader;
 t.onloadend = function(e) {
 var t = e.target.result.split("\n");
-milog("history.length " + t.length), t.length == 3 ? (milog("tama\u00f1o en .tst " + t[0]), t[0] == tamano_actual ? (control = t[1].split("|"), marcas = t[2].split("|"), num_pregs_control = control.length, acertadas = numero_preguntas - num_pregs_control, miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas(acertadas + "/" + numero_preguntas), carga_pregunta()) : (milog("tama\u00f1os distintos"), fbReseteo(!0))) : (milog(".tst corrupto"), fbReseteo(!0));
+milog("history.length " + t.length), t.length == 3 ? (milog("tama\u00f1o en .tst " + t[0]), t[0] == tamano_actual ? (control = t[1] ? t[1].split("|") : [], marcas = t[2] ? t[2].split("|") : [], num_pregs_control = control.length, acertadas = numero_preguntas - num_pregs_control, miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas(acertadas + "/" + numero_preguntas), carga_pregunta()) : (milog("tama\u00f1os distintos"), fbReseteo(!0))) : (milog(".tst corrupto"), fbReseteo(!0));
 }, t.onerror = function(e) {
 milog("code " + e.code + " leyendo .tst"), fbReseteo(!0);
 }, t.readAsText(e);
 }
 
 function eleccion_lista() {
-listas = [ "Ingl\u00e9s 1|0/23", "Ingl\u00e9s 2|3/210", "Ingl\u00e9s-3|201/300", "Ingl\u00e9s_4|", "Ingl\u00e9s-diecio|210/222", "Ingl\u00e9s-6|0/21", "Ingl\u00e9s7ddd dddd ddddd ddd|3/4", "Ingl\u00e9s 8|1/323", "Ingl\u00e9s-9|0/21", "Ingl\u00e9sfffffffffffffffffff-10|3/4", "Ingl\u00e9s 11|1/323" ], miTest.$.listas.setListas(Math.random());
+var e = dir_test.createReader();
+e.readEntries(filtra_listas, function(e) {
+milog("code " + e.code + " leyendo ficheros");
+});
+}
+
+function filtra_listas(e) {
+console.log("filtra_lista");
+var t, n, r = [];
+for (t = 0; t < e.length; t++) e[t].name.substring(e[t].name.length - 4) == ".txt" && r.push(e[t].name.substring(0, e[t].name.length - 4) + estadis(e[t].name));
+milog(r.join(" ")), miTest.$.listas.setListas(r);
+}
+
+function estadis(e) {
+return "|1/2";
 }
 
 function salvar_marcadas(e) {
