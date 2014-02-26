@@ -1,7 +1,7 @@
 
 // minifier: path aliases
 
-enyo.path.addPaths({layout: "/e/datos/Dropbox/bin/movil/TxTest/enyo/../lib/layout/", onyx: "/e/datos/Dropbox/bin/movil/TxTest/enyo/../lib/onyx/", onyx: "/e/datos/Dropbox/bin/movil/TxTest/enyo/../lib/onyx/source/"});
+enyo.path.addPaths({layout: "/zd/atc/Dropbox/bin/movil/TxTest/enyo/../lib/layout/", onyx: "/zd/atc/Dropbox/bin/movil/TxTest/enyo/../lib/onyx/", onyx: "/zd/atc/Dropbox/bin/movil/TxTest/enyo/../lib/onyx/source/"});
 
 // FittableLayout.js
 
@@ -4737,7 +4737,7 @@ fb_quitar_marcas: function() {
 this.$.marcadas.hide(), this.$.b_todas.setContent(m3[this.x_idioma][4]), this.$.p_todas.show();
 },
 fb_todas: function() {
-this.$.p_todas.hide(), this.$.b_todas.getContent() == "Quitar todas las marcas" ? marcas.length = 0 : borrar_marcadas();
+this.$.p_todas.hide(), this.$.b_todas.getContent() == m3[this.x_idioma][4] ? marcas.length = 0 : borrar_marcadas();
 },
 fb_marcas2fich: function() {
 this.$.marcadas.hide(), this.$.i_nom_fich.setValue(""), this.$.b_grabar.setDisabled(!0), this.$.p_nom_fichero.show();
@@ -5501,7 +5501,7 @@ milog("error escribiendo " + nombre + ".tst " + e.code);
 }, milog(tamano_actual + "\n" + control.join("|") + "\n" + marcas.join("|")), e.write(tamano_actual + "\n" + control.join("|") + "\n" + marcas.join("|"));
 }
 
-function salva_ultima(e) {
+function salva_ultima() {
 dir_test.getFile("ultima.161", {
 create: !0,
 exclusive: !1
@@ -5670,5 +5670,55 @@ return e - t;
 }
 
 function borrar_marcadas() {
-console.log("borrar_marcadas");
+console.log("borrar_marcadas"), dir_test.getFile(nombre + ".171", {
+create: !0,
+exclusive: !1
+}, function(e) {
+e.createWriter(escribe_nomarcadas, function(e) {
+milog("error accediendo a " + nombre + ".171 " + e.code);
+});
+}, function(e) {
+milog("error creando " + nombre + ".171 " + e.code);
+});
+}
+
+function escribe_nomarcadas(e) {
+console.log("escribe_nomarcadas");
+var t = !1, n = [];
+e.onerror = function(e) {
+milog("error escribiendo " + nombre + ".171 " + e.code), alert("Error"), t = !0;
+};
+for (var r = 0; r < lista.length - 1; r += 2) marcas.indexOf(r) < 0 && (n.push(lista[r]), n.push(lista[r + 1]));
+console.log(lista.toString()), e.write(n.join("\n")), t || renombra(e);
+}
+
+function renombra(e) {
+function t(e) {
+e.remove(function(e) {}, function(e) {}), actualiza_lista_estado(e);
+}
+function n(e) {
+alert("Error");
+}
+console.log("renombra"), e.moveTo(dir_test, nombre + ".txt", t, n);
+}
+
+function actualiza_lista_estado(e) {
+console.log("actualiza_lista_estado"), tamano_actual = e.file().size, marcas.sort();
+var t, n, r;
+for (r = 0; r < marcas.length; r++) lista.splice(marcas[r], 2), t = control.indexOf(marcas[r]), t >= 0 && control.splice(t, 1);
+for (r = 0; r < marcas.length; r++) for (t = 0; t < control.length; t++) {
+if (control[t] < marcas[r]) continue;
+for (n = t; n < control.length; n++) control[n] -= 1;
+break;
+}
+marcas = [];
+}
+
+function reduce_control(e) {
+var t;
+for (i in control) {
+while (control[i] < e) continue;
+t = i;
+break;
+}
 }
