@@ -1,7 +1,7 @@
 
 // minifier: path aliases
 
-enyo.path.addPaths({layout: "/zd/atc/Dropbox/bin/movil/TxTest/enyo/../lib/layout/", onyx: "/zd/atc/Dropbox/bin/movil/TxTest/enyo/../lib/onyx/", onyx: "/zd/atc/Dropbox/bin/movil/TxTest/enyo/../lib/onyx/source/"});
+enyo.path.addPaths({layout: "/e/datos/Dropbox/bin/movil/TxTest/enyo/../lib/layout/", onyx: "/e/datos/Dropbox/bin/movil/TxTest/enyo/../lib/onyx/", onyx: "/e/datos/Dropbox/bin/movil/TxTest/enyo/../lib/onyx/source/"});
 
 // FittableLayout.js
 
@@ -5683,13 +5683,15 @@ milog("error creando " + nombre + ".171 " + e.code);
 }
 
 function escribe_nomarcadas(e) {
-console.log("escribe_nomarcadas");
-var t = !1, n = [];
+var t = !1;
 e.onerror = function(e) {
 milog("error escribiendo " + nombre + ".171 " + e.code), alert("Error"), t = !0;
 };
-for (var r = 0; r < lista.length - 1; r += 2) marcas.indexOf(r) < 0 && (n.push(lista[r]), n.push(lista[r + 1]));
-console.log(lista.toString()), e.write(n.join("\n")), t || renombra(e);
+for (var n = 0; n < lista.length - 1; n += 2) if (marcas.indexOf(n) < 0) {
+e.write(lista[n] + "\n" + lista[n + 1] + "\n");
+if (t) break;
+}
+t || renombra(e);
 }
 
 function renombra(e) {
@@ -5699,16 +5701,15 @@ e.remove(function(e) {}, function(e) {}), actualiza_lista_estado(e);
 function n(e) {
 alert("Error");
 }
-console.log("renombra"), e.moveTo(dir_test, nombre + ".txt", t, n);
+e.moveTo(dir_test, nombre + ".txt", t, n);
 }
 
 function actualiza_lista_estado(e) {
-console.log("actualiza_lista_estado"), tamano_actual = e.file().size, marcas.sort();
+tamano_actual = e.file().size, marcas.sort();
 var t, n, r;
 for (r = 0; r < marcas.length; r++) lista.splice(marcas[r], 2), t = control.indexOf(marcas[r]), t >= 0 && control.splice(t, 1);
 for (r = 0; r < marcas.length; r++) for (t = 0; t < control.length; t++) {
 if (control[t] < marcas[r]) continue;
-for (n = t; n < control.length; n++) control[n] -= 1;
 break;
 }
 marcas = [];
