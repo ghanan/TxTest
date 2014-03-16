@@ -1,6 +1,7 @@
+
 // minifier: path aliases
 
-enyo.path.addPaths({layout: "/e/datos/Dropbox/bin/movil/TxTest/enyo/../lib/layout/", onyx: "/e/datos/Dropbox/bin/movil/TxTest/enyo/../lib/onyx/", onyx: "/e/datos/Dropbox/bin/movil/TxTest/enyo/../lib/onyx/source/"});
+enyo.path.addPaths({layout: "/e/datos/Dropbox/bin/movil/TxTest.2.9/enyo/../lib/layout/", onyx: "/e/datos/Dropbox/bin/movil/TxTest.2.9/enyo/../lib/onyx/", onyx: "/e/datos/Dropbox/bin/movil/TxTest.2.9/enyo/../lib/onyx/source/"});
 
 // FittableLayout.js
 
@@ -5688,7 +5689,7 @@ e.onerror = function(e) {
 milog("error escribiendo " + nombre + ".171 " + e.code), alert("Error"), t = !0;
 };
 for (var r = 0; r < lista.length - 1; r += 2) marcas.indexOf(r + "") < 0 && (n.push(lista[r]), n.push(lista[r + 1]));
-console.log(lista.toString()), e.write(n.join("\n")), t || renombra(e);
+console.log(n.toString()), e.write(n.join("\n")), console.log("Error: " + t), t || renombra(e);
 }
 
 function renombra(e) {
