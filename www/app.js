@@ -4750,7 +4750,7 @@ this.$.marcadas.hide(), this.$.b_todas.setContent(m4[this.x_idioma][1]), this.$.
 },
 fb_grabar: function() {
 var e = this.$.i_nom_fich.getValue();
-e && e.replace(/ /g, "") && (this.$.p_nom_fichero.hide(), salvar_marcadas(e));
+e && e.replace(/ /g, "") && (this.$.p_nom_fichero.hide(), e = e.trim(), e.substr(-4) != ".txt" && (e += ".txt"), salvar_marcadas(e));
 },
 fb_cancelar: function() {
 this.$.p_nom_fichero.hide();
@@ -4987,7 +4987,7 @@ kind: "enyo.FittableRows",
 nuevas_prefs: [],
 published: {
 x_idioma: "0",
-x_actualiza: "1"
+x_actualiza: ""
 },
 classes: "onyx",
 fit: !0,
@@ -5283,7 +5283,7 @@ this.inherited(arguments), W > 400 && (this.$.b_aplicar.setStyle("height: 1.4cm;
 x_actualizaChanged: function() {
 this.nuevas_prefs.length = 0;
 for (i in prefs) this.nuevas_prefs.push(prefs[i]);
-this.$.row_preg.setStyle("color: rgb(" + prefs[P_TXT_R] + "," + prefs[P_TXT_G] + "," + prefs[P_TXT_B] + "); background-color: rgb(" + prefs[P_FON_R] + "," + prefs[P_FON_G] + "," + prefs[P_FON_B] + ");"), this.$.p_preg_tam.setValue(prefs[P_TXT_TAM]), this.$.p_pc_r.setValue(prefs[P_TXT_R]), this.$.p_pc_g.setValue(prefs[P_TXT_G]), this.$.p_pc_b.setValue(prefs[P_TXT_B]), this.$.p_pf_r.setValue(prefs[P_FON_R]), this.$.p_pf_g.setValue(prefs[P_FON_G]), this.$.p_pf_b.setValue(prefs[P_FON_B]), this.$.row_resp.setStyle("color: rgb(" + prefs[R_TXT_R] + "," + prefs[R_TXT_G] + "," + prefs[R_TXT_B] + "); background-color: rgb(" + prefs[R_FON_R] + "," + prefs[R_FON_G] + "," + prefs[R_FON_B] + ");"), this.$.p_resp_tam.setValue(prefs[R_TXT_TAM]), this.$.p_rc_r.setValue(prefs[R_TXT_R]), this.$.p_rc_g.setValue(prefs[R_TXT_G]), this.$.p_rc_b.setValue(prefs[R_TXT_B]), this.$.p_rf_r.setValue(prefs[R_FON_R]), this.$.p_rf_g.setValue(prefs[R_FON_G]), this.$.p_rf_b.setValue(prefs[R_FON_B]);
+this.$.row_preg.setStyle("color: rgb(" + prefs[P_TXT_R] + "," + prefs[P_TXT_G] + "," + prefs[P_TXT_B] + "); background-color: rgb(" + prefs[P_FON_R] + "," + prefs[P_FON_G] + "," + prefs[P_FON_B] + ");"), this.$.p_preg_tam.setValue(prefs[P_TXT_TAM] - 0), this.$.p_pc_r.setValue(prefs[P_TXT_R] - 0), this.$.p_pc_g.setValue(prefs[P_TXT_G] - 0), this.$.p_pc_b.setValue(prefs[P_TXT_B] - 0), this.$.p_pf_r.setValue(prefs[P_FON_R] - 0), this.$.p_pf_g.setValue(prefs[P_FON_G] - 0), this.$.p_pf_b.setValue(prefs[P_FON_B] - 0), this.$.row_resp.setStyle("color: rgb(" + prefs[R_TXT_R] + "," + prefs[R_TXT_G] + "," + prefs[R_TXT_B] + "); background-color: rgb(" + prefs[R_FON_R] + "," + prefs[R_FON_G] + "," + prefs[R_FON_B] + ");"), this.$.p_resp_tam.setValue(prefs[R_TXT_TAM] - 0), this.$.p_rc_r.setValue(prefs[R_TXT_R] - 0), this.$.p_rc_g.setValue(prefs[R_TXT_G] - 0), this.$.p_rc_b.setValue(prefs[R_TXT_B] - 0), this.$.p_rf_r.setValue(prefs[R_FON_R] - 0), this.$.p_rf_g.setValue(prefs[R_FON_G] - 0), this.$.p_rf_b.setValue(prefs[R_FON_B] - 0);
 },
 x_idiomaChanged: function() {
 this.$.r_opciones.setContent(m1[this.nuevas_prefs[IDIOMA]][2]), this.$.r_pregunta.setContent(m5[this.nuevas_prefs[IDIOMA]][0]), this.$.r_respuesta.setContent(m5[this.nuevas_prefs[IDIOMA]][1]), this.$.r_preg_tam.setContent(m5[this.nuevas_prefs[IDIOMA]][2]), this.$.r_resp_tam.setContent(m5[this.nuevas_prefs[IDIOMA]][2]), this.$.r_preg_fon.setContent(m5[this.nuevas_prefs[IDIOMA]][3]), this.$.r_resp_fon.setContent(m5[this.nuevas_prefs[IDIOMA]][3]);
@@ -5351,7 +5351,7 @@ this.$.row_resp.setStyle("color: rgb(" + this.nuevas_prefs[R_TXT_R] + "," + this
 },
 fb_aplicar: function() {
 for (i in this.nuevas_prefs) prefs[i] = this.nuevas_prefs[i];
-grabar_preferencias(), miTest.setX_idioma(this.nuevas_prefs[IDIOMA]), miTest.$.preg_resp.setX_actualizar(Math.random()), miTest.setIndex(0);
+graba_prefs(dir_test, !1), miTest.setX_idioma(this.nuevas_prefs[IDIOMA]), miTest.$.preg_resp.setX_actualizar(Math.random()), miTest.setIndex(0);
 },
 fb_cancelar: function() {
 this.$.b_aplicar.setContent(m1[prefs[IDIOMA]][5]), this.$.b_cancelar.setContent(m1[prefs[IDIOMA]][3]), miTest.setIndex(0);
@@ -5520,6 +5520,14 @@ milog("error escribiendo ultima.161 " + e.code);
 }, e.write(nombre + ".txt");
 }
 
+function quita_marca(e) {
+var t;
+for (t = 0; t < marcas.length; t++) if (marcas[t] == e.toString()) {
+marcas.splice(t, 1);
+break;
+}
+}
+
 // preferencias.js
 
 function inicio_getFS() {
@@ -5536,10 +5544,10 @@ milog("gotDIR"), dir_test = e, e.getFile("prefs.161", {
 create: !1
 }, function(t) {
 t.file(gotPREFS_read, function(t) {
-milog("sin acceso a prefs" + t.code), crea_prefs(e);
+milog("sin acceso a prefs " + t.code), crea_prefs(e, !0);
 });
 }, function(t) {
-milog("no encuentro prefs" + t.code), crea_prefs(e);
+milog("no encuentro prefs " + t.code), graba_prefs(e, !0);
 }), carga_lista_inicial(e);
 }
 
@@ -5549,7 +5557,7 @@ var t = new FileReader;
 t.onloadend = function(e) {
 prefs = e.target.result.split("\n"), actualiza_pantalla_inicial();
 }, t.onerror = function(e) {
-milog("error leyendo prefs" + e.code), crea_prefs(direc);
+milog("error leyendo prefs " + e.code), crea_prefs(direc, !0);
 }, t.readAsText(e);
 }
 
@@ -5557,27 +5565,23 @@ function actualiza_pantalla_inicial() {
 milog("actualiza_pantalla_inical"), miTest.setX_idioma(prefs[IDIOMA]), miTest.$.preg_resp.setX_actualizar(Math.random());
 }
 
-function crea_prefs(e) {
-milog("crea_prefs"), prefs_default(), e.getFile("prefs.161", {
+function graba_prefs(e, t) {
+milog("graba_prefs"), milog(e.toString()), t && prefs_default(), e.getFile("prefs.161", {
 create: !0,
-exclusive: !0
+exclusive: t
 }, function(e) {
 e.createWriter(escribe_prefs, function(e) {
-milog("error accediendo a prefs" + e.code);
+milog("error accediendo a prefs " + e.code);
 });
 }, function(e) {
-milog("error creando prefs" + e.code);
+milog("error creando prefs " + e.code);
 });
 }
 
 function escribe_prefs(e) {
 milog("escribe_prefs"), e.onerror = function(e) {
-milog("error escribiendo prefs" + e.code);
+milog("error escribiendo prefs " + e.code);
 }, e.write(prefs.join("\n"));
-}
-
-function grabar_preferencias() {
-milog("grabar_preferencias");
 }
 
 // listas.js
@@ -5666,7 +5670,28 @@ return "|1/2";
 function salvar_marcadas(e) {
 console.log(e), marcas.sort(function(e, t) {
 return e - t;
+}), dir_test.getFile(e, {
+create: !0,
+exclusive: !1
+}, function(t) {
+t.createWriter(function(n) {
+escribe_marcadas(n, t, e);
+}, function(t) {
+milog("error accediendo a " + e + " " + t.code);
 });
+}, function(t) {
+milog("error creando " + e + " " + t.code);
+});
+}
+
+function escribe_marcadas(e, t, n) {
+console.log("escribe_marcadas");
+var r = !1, i = [];
+n.onerror = function(e) {
+milog("error escribiendo " + n + " " + e.code), r = !0;
+};
+for (var s = 0; s < marcas.length; s++) i.push(lista[marcas[s]]), i.push(lista[marcas[s] + 1 - 0]);
+console.log(i.toString()), e.write(i.join("\n")), console.log("Error: " + r);
 }
 
 function borrar_marcadas() {
@@ -5674,7 +5699,9 @@ console.log("borrar_marcadas"), dir_test.getFile(nombre + ".171", {
 create: !0,
 exclusive: !1
 }, function(e) {
-e.createWriter(escribe_nomarcadas, function(e) {
+e.createWriter(function(t) {
+escribe_nomarcadas(t, e);
+}, function(e) {
 milog("error accediendo a " + nombre + ".171 " + e.code);
 });
 }, function(e) {
@@ -5682,36 +5709,40 @@ milog("error creando " + nombre + ".171 " + e.code);
 });
 }
 
-function escribe_nomarcadas(e) {
+function escribe_nomarcadas(e, t) {
 console.log("escribe_nomarcadas");
-var t = !1, n = [];
+var n = !1, r = [];
 e.onerror = function(e) {
-milog("error escribiendo " + nombre + ".171 " + e.code), alert("Error"), t = !0;
+milog("error escribiendo " + nombre + ".171 " + e.code), n = !0;
 };
-for (var r = 0; r < lista.length - 1; r += 2) marcas.indexOf(r + "") < 0 && (n.push(lista[r]), n.push(lista[r + 1]));
-console.log(n.toString()), alert(n.toString()), e.write(n.join("\n")), console.log("Error: " + t), alert("Error: " + t), t || renombra(e);
+for (var i = 0; i < lista.length - 1; i += 2) marcas.indexOf(i + "") < 0 && marcas.indexOf(i) < 0 && (r.push(lista[i]), r.push(lista[i + 1]));
+console.log(r.toString()), e.write(r.join("\n")), console.log("Error: " + n), n || renombra(t);
 }
 
 function renombra(e) {
 function t(e) {
-alert("Borrando"), e.remove(function(e) {}, function(e) {}), actualiza_lista_estado(e);
+actualiza_lista_marcas_estado(e);
 }
 function n(e) {
 alert("Error");
 }
-console.log("renombra"), alert("renombra"), e.moveTo(dir_test, "pp.txt", t, n);
+console.log("renombra"), e.moveTo(dir_test, nombre + ".txt", t, n);
 }
 
-function actualiza_lista_estado(e) {
-console.log("actualiza_lista_estado"), tamano_actual = e.file().size, marcas.sort();
+function actualiza_lista_marcas_estado(e) {
+console.log("actualiza_lista_marcas_estado"), e.file(function(e) {
+tamano_actual = e.size;
+}, function(e) {
+milog("err " + e.code + " accediendo " + fichLista);
+}), marcas.sort();
 var t, n, r;
 for (r = 0; r < marcas.length; r++) lista.splice(marcas[r], 2), t = control.indexOf(marcas[r]), t >= 0 && control.splice(t, 1);
 for (r = 0; r < marcas.length; r++) for (t = 0; t < control.length; t++) {
 if (control[t] < marcas[r]) continue;
-for (n = t; n < control.length; n++) control[n] -= 1;
+for (n = t; n < control.length; n++) control[n] -= 2;
 break;
 }
-marcas = [];
+marcas = [], salvar_estado(), numero_preguntas = (lista.length - lista.length % 2) / 2, num_pregs_control = control.length, acertadas = numero_preguntas - num_pregs_control, miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas(acertadas + "/" + numero_preguntas), carga_pregunta();
 }
 
 function reduce_control(e) {
