@@ -5694,12 +5694,12 @@ console.log(n.toString()), alert(n.toString()), e.write(n.join("\n")), console.l
 
 function renombra(e) {
 function t(e) {
-e.remove(function(e) {}, function(e) {}), actualiza_lista_estado(e);
+alert("Borrando"), e.remove(function(e) {}, function(e) {}), actualiza_lista_estado(e);
 }
 function n(e) {
 alert("Error");
 }
-console.log("renombra"), e.moveTo(dir_test, nombre + ".txt", t, n);
+console.log("renombra"), alert("renombra"), e.moveTo(dir_test, nombre + ".txt", t, n);
 }
 
 function actualiza_lista_estado(e) {
