@@ -1,4 +1,3 @@
-
 // minifier: path aliases
 
 enyo.path.addPaths({layout: "/e/datos/Dropbox/bin/movil/TxTest/enyo/../lib/layout/", onyx: "/e/datos/Dropbox/bin/movil/TxTest/enyo/../lib/onyx/", onyx: "/e/datos/Dropbox/bin/movil/TxTest/enyo/../lib/onyx/source/"});
