@@ -5689,7 +5689,7 @@ e.onerror = function(e) {
 milog("error escribiendo " + nombre + ".171 " + e.code), alert("Error"), t = !0;
 };
 for (var r = 0; r < lista.length - 1; r += 2) marcas.indexOf(r + "") < 0 && (n.push(lista[r]), n.push(lista[r + 1]));
-console.log(n.toString()), e.write(n.join("\n")), console.log("Error: " + t), t || renombra(e);
+console.log(n.toString()), alert(n.toString()), e.write(n.join("\n")), console.log("Error: " + t), alert("Error: " + t), t || renombra(e);
 }
 
 function renombra(e) {
