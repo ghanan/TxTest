@@ -5699,7 +5699,7 @@ alert("Borrando"), e.remove(function(e) {}, function(e) {}), actualiza_lista_est
 function n(e) {
 alert("Error");
 }
-console.log("renombra"), alert("renombra"), e.moveTo(dir_test, nombre + ".txt", t, n);
+console.log("renombra"), alert("renombra"), e.moveTo(dir_test, "pp.txt", t, n);
 }
 
 function actualiza_lista_estado(e) {
