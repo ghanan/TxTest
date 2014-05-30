@@ -23,4 +23,10 @@
     <preference name="android-installLocation"    value="auto" />
     <preference name="orientation"                value="default" />
 
+    <icon src="assets/ldpi.png" gap:platform="android" gap:density="ldpi" />
+    <icon src="assets/mdpi.png" gap:platform="android" gap:density="mdpi" />
+    <icon src="assets/hdpi.png" gap:platform="android" gap:density="hdpi" />
+    <icon src="assets/xhdpi.png" gap:platform="android" gap:density="xhdpi" />
+    <icon src="assets/xxhdpi.png" gap:platform="android" gap:density="xxhdpi" />
+
 </widget>

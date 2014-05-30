@@ -4505,7 +4505,7 @@ name: "listas",
 style: "text-align: center; background-color: white; height: 36px",
 components: [ {
 name: "listas_i",
-content: "3 listas",
+content: " ",
 style: "padding-top: 8px"
 } ]
 } ]
@@ -4617,7 +4617,7 @@ style: "margin-bottom: 14px; text-align: center"
 }, {
 name: "b_desmarcar",
 kind: "onyx.Button",
-content: "Quitar marcas",
+content: "Desmarcar todas",
 style: "width: 100%; height: 1.2cm",
 classes: "onyx-affirmative",
 ontap: "fb_quitar_marcas"
@@ -4687,36 +4687,27 @@ classes: "onyx-negative",
 ontap: "fb_cancelar"
 } ]
 } ]
-}, {
-name: "p_ay",
-kind: "onyx.Popup",
-floating: !0,
-style: "border-width: thick; width: 70%; background-color: blue",
-centered: "true",
-modal: !0,
-autoDismiss: !0,
-allowHtml: !0
 } ],
 create: function() {
-this.inherited(arguments), p1p1 = W < 241 ? 6 : 12, this.$.bg1.setStyle("padding: " + p1p1 + "px"), this.$.bg2.setStyle("padding-left: " + p1p1 + "px; padding-right: " + p1p1 + "px"), this.$.b_estadisticas.setStyle("margin-right: 9px");
+console.log("create"), this.inherited(arguments), p1p1 = W < 241 ? 6 : 12, this.$.bg1.setStyle("padding: " + p1p1 + "px"), this.$.bg2.setStyle("padding-left: " + p1p1 + "px; padding-right: " + p1p1 + "px"), this.$.b_estadisticas.setStyle("margin-right: 9px");
 var e = W - 2 * p1p1;
-H < 321 ? (this.$.acciones.setStyle("margin: " + p1p1 + "px; width: " + (W / 2 - 1.5 * p1p1) + "px;" + "height: " + 1.2 + "cm"), this.$.opciones.setStyle("margin-top: " + p1p1 + "px; width: " + (W / 2 - 1.5 * p1p1) + "px;" + "height: " + 1.2 + "cm")) : (this.$.acciones.setStyle("margin: " + p1p1 + "px; width: " + e + "px; height: 1.5cm"), this.$.opciones.setStyle("margin-left: " + p1p1 + "px; width: " + e + "px; height: 1.5cm"));
+this.$.acciones.hide(), this.$.opciones.hide(), H < 321 ? (this.$.acciones.setStyle("margin: " + p1p1 + "px; width: " + (W / 2 - 1.5 * p1p1) + "px;" + "height: " + 1.2 + "cm"), this.$.opciones.setStyle("margin-top: " + p1p1 + "px; width: " + (W / 2 - 1.5 * p1p1) + "px;" + "height: " + 1.2 + "cm")) : (this.$.acciones.setStyle("margin: " + p1p1 + "px; width: " + e + "px; height: 1.5cm"), this.$.opciones.setStyle("margin-left: " + p1p1 + "px; width: " + e + "px; height: 1.5cm"));
 },
 x_idiomaChanged: function() {
-this.$.r_disponibles.setContent(m2[this.x_idioma][0]), this.$.tLisAct.setContent(m2[this.x_idioma][1]), this.$.acciones.setContent(m2[this.x_idioma][2]), this.$.opciones.setContent(m1[this.x_idioma][2]), this.$.b_empezar.setContent(m2[this.x_idioma][3]), this.$.b_salir.setContent(m1[this.x_idioma][1]), this.$.r_reset.setContent(m2[this.x_idioma][4]), this.$.b_si.setContent(m1[this.x_idioma][0]), this.$.b_no.setContent(m1[this.x_idioma][6]), this.$.n_marcas.setContent(m3[this.x_idioma][0]), this.$.b_desmarcar.setContent(m3[this.x_idioma][1]), this.$.b_marcas2fich.setContent(m3[this.x_idioma][2]), this.$.b_borrar_marcadas.setContent(m3[this.x_idioma][3]), this.$.i_nom_fich.setPlaceholder(m4[this.x_idioma][0]), this.$.b_grabar.setContent(m1[this.x_idioma][4]), this.$.b_cancelar.setContent(m1[this.x_idioma][3]);
+this.$.r_disponibles.setContent(m2[this.x_idioma][0]), this.$.tLisAct.setContent(m2[this.x_idioma][1]), this.$.acciones.setContent(m2[this.x_idioma][2]), this.$.opciones.setContent(m1[this.x_idioma][2]), this.$.b_empezar.setContent(m2[this.x_idioma][3]), this.$.b_salir.setContent(m1[this.x_idioma][1]), this.$.r_reset.setContent(m2[this.x_idioma][4]), this.$.b_si.setContent(m1[this.x_idioma][0]), this.$.b_no.setContent(m1[this.x_idioma][6]), this.$.n_marcas.setContent(m3[this.x_idioma][0]), this.$.b_desmarcar.setContent(m3[this.x_idioma][1]), this.$.b_marcas2fich.setContent(m3[this.x_idioma][2]), this.$.b_borrar_marcadas.setContent(m3[this.x_idioma][3]), this.$.i_nom_fich.setPlaceholder(m4[this.x_idioma][0]), this.$.b_grabar.setContent(m1[this.x_idioma][4]), this.$.b_cancelar.setContent(m1[this.x_idioma][3]), this.$.listas_i.setContent(this.listas + " " + m5[this.x_idioma][4]);
 },
 lis_actualChanged: function() {
 if (H > 320) {
 var e = this.$.bg1.getComputedStyleValue("width");
 this.$.acciones.setStyle("margin: " + p1p1 + "px; width: " + e + "; height: 1.5cm"), this.$.opciones.setStyle("margin-left: " + p1p1 + "px; width: " + e + "; height: 1.5cm");
 }
-this.$.t_lista_actual_i.setContent(this.lis_actual);
+this.$.acciones.show(), this.$.opciones.show(), this.$.t_lista_actual_i.setContent(this.lis_actual);
 },
 estadisticasChanged: function() {
 this.$.b_estadisticas.setContent(this.estadisticas), this.$.tLisAct2.reflow();
 },
 listasChanged: function() {
-console.log("listasa");
+console.log("listasChanged"), this.$.listas_i.setContent(this.listas + " " + m5[this.x_idioma][4]);
 },
 fb_estadisticas: function() {
 this.$.reset_sn.show();
@@ -4728,7 +4719,7 @@ fb_reset_sn: function(e) {
 e == this.$.b_si && fbReseteo(!1), this.$.reset_sn.hide();
 },
 elige_lista: function() {
-this.$.b_estadisticas.setStyle("margin-right: 0px"), eleccion_lista();
+this.$.b_estadisticas.setStyle("margin-right: 0px"), eleccion_lista("eleccion");
 },
 fb_acciones: function() {
 this.$.n_marcas.setContent(m3[this.x_idioma][0] + ": " + marcas.length), marcas.length ? (this.$.b_desmarcar.setDisabled(!1), this.$.b_marcas2fich.setDisabled(!1), this.$.b_borrar_marcadas.setDisabled(!1)) : (this.$.b_desmarcar.setDisabled(!0), this.$.b_marcas2fich.setDisabled(!0), this.$.b_borrar_marcadas.setDisabled(!0)), this.$.marcadas.show();
@@ -5383,7 +5374,7 @@ fit: !0,
 components: [ {
 allowHtml: !0,
 style: "padding: 10px",
-content: "<br />Autor: Antonio Tovar<br />antovar@260mb.com<br /><br />Ayuda:<br /><br />Toca en DISPONIBLES para elegir lista.<br /><br />Toca en nn/nn para reiniciar acertadas.<br /><br />Los ficheros deben tener en las l\u00edneas impares las preguntas y en las pares las respuestas.<br /><br />Las l\u00edneas pueden incluir c\u00f3digo html.<br /><br />Los ficheros deben colocarse en /sdcard/TxTest."
+content: "<br />Autor: Antonio Tovar<br />antovar@260mb.com<br /><br />Ayuda:<br /><br />Toca en DISPONIBLES para elegir lista.<br /><br />Toca en nn/nn para reiniciar acertadas.<br /><br />Los ficheros deben tener en las l\u00edneas impares las preguntas y en las pares las respuestas (una sola l\u00ednea en cada caso).<br /><br />Las l\u00edneas pueden incluir c\u00f3digo html.<br /><br />Los ficheros deben colocarse en /sdcard/TxTest y tener extensi\u00f3n .txt"
 } ]
 }, {
 kind: "onyx.Toolbar",
@@ -5421,7 +5412,7 @@ fit: !0,
 components: [ {
 allowHtml: !0,
 style: "padding: 10px",
-content: "<br />Author: Antonio Tovar<br />antovar@260mb.com<br /><br />Help:<br /><br />Tap on AVAILABLES to choose list.<br /><br />Tap on nn/nn to reset corrects.<br /><br />Files must have questions in odd lines and answers in even lines.<br /><br />Lines may include html code.<br /><br />Files must be copied to /sdcard/TxTest."
+content: "<br />Author: Antonio Tovar<br />antovar@260mb.com<br /><br />Help:<br /><br />Tap on AVAILABLES to choose list.<br /><br />Tap on nn/nn to reset corrects.<br /><br />Files must have questions in odd lines and answers in even lines (only one line in any case).<br /><br />Lines may include html code.<br /><br />Files must be copied to /sdcard/TxTest and have .txt extension."
 } ]
 }, {
 kind: "onyx.Toolbar",
@@ -5440,7 +5431,7 @@ function prefs_default() {
 prefs[VERSION] = "1", prefs[IDIOMA] = "0", prefs[P_TXT_TAM] = 100, prefs[R_TXT_TAM] = 100, prefs[P_TXT_R] = 255, prefs[P_TXT_G] = 255, prefs[P_TXT_B] = 0, prefs[R_TXT_R] = 255, prefs[R_TXT_G] = 255, prefs[R_TXT_B] = 255, prefs[P_FON_R] = 25, prefs[P_FON_G] = 25, prefs[P_FON_B] = 112, prefs[R_FON_R] = 139, prefs[R_FON_G] = 79, prefs[R_FON_B] = 87;
 }
 
-var VERSION_ACTUAL = "1", logs = "", miTest, dir_test, H, W, marcada = !1, nombre = "", nombre_prox = "", ultima = "", tamano = 0, tamano_actual = 0, numero_preguntas = 0, lista = new Array, num_preg = 0, acertadas = 0, control = new Array, marcas = new Array, indice_control = 0, num_pregs_control = 0, m1 = [ [ "Si", "Salir", "Preferencias", "Cancelar", "Grabar", "Aplicar", "No", "Si" ], [ "Yes", "Exit", "Preferences", "Cancel", "Save", "Apply", "No", "Ok" ] ], m2 = [ [ "DISPONIBLES", "LISTA ACTUAL", "Marcadas", "Empezar", "\u00bfReiniciar acertadas?" ], [ "AVAILABLE", "CURRENT LIST", "Marked", "Start", "Reset corrects?" ] ], m3 = [ [ "N\u00fam. marcas", "Desmarcar", "Fichero con marcadas", "Borrar marcadas", "Quitar todas las marcas" ], [ "Num. marks", "Unmark", "Marked to file", "Remove marked", "Remove all marks" ] ], m4 = [ [ "Nombre del fichero", "Eliminar preguntas", "Volver", "Respuesta", "Marcar", "Desmarcar" ], [ "File name", "Remove questions", "Back", "Answer", "Mark", "Unmark" ] ], m5 = [ [ "PREGUNTA", "RESPUESTA", "Tama\u00f1o de letra", "Fondo" ], [ "QUESTION", "ANSWER", "Font size", "Background" ] ], ay = [ [ "<br />Toca en DISPONIBLES para elegir lista<br /><br />Toca en nn/nn para reiniciar acertadas<br />Formato de los ficheros " ], [ "<br />Tap on AVAILABLES to choose list<br /><br />Tap on nn/nn to reset corrects" ] ], ii = [ "<br /><br />----<br /><br />Antonio Tovar<br />antovar@260mb.com<br /><br />" ], prefs = new Array, VERSION = 0, IDIOMA = 1, P_TXT_TAM = 2, R_TXT_TAM = 3, P_TXT_R = 4, P_TXT_G = 5, P_TXT_B = 6, R_TXT_R = 7, R_TXT_G = 8, R_TXT_B = 9, P_FON_R = 10, P_FON_G = 11, P_FON_B = 12, R_FON_R = 13, R_FON_G = 14, R_FON_B = 15;
+var VERSION_ACTUAL = "1", logs = "", miTest, dir_test, H, W, marcada = !1, nombre = "", nombre_prox = "", ultima = "", tamano = 0, tamano_actual = 0, numero_preguntas = 0, lista = new Array, num_preg = 0, acertadas = 0, control = new Array, marcas = new Array, indice_control = 0, num_pregs_control = 0, m1 = [ [ "Si", "Salir", "Preferencias", "Cancelar", "Grabar", "Aplicar", "No", "Si" ], [ "Yes", "Exit", "Preferences", "Cancel", "Save", "Apply", "No", "Ok" ] ], m2 = [ [ "DISPONIBLES", "LISTA ACTUAL", "Marcadas", "Empezar", "\u00bfReiniciar acertadas?" ], [ "AVAILABLE", "CURRENT LIST", "Marked", "Start", "Reset corrects?" ] ], m3 = [ [ "N\u00fam. marcas", "Desmarcar todas", "Fichero con marcadas", "Borrar marcadas", "Quitar todas las marcas" ], [ "Num. marks", "Unmark all", "Marked to file", "Remove marked", "Remove all marks" ] ], m4 = [ [ "Nombre del fichero", "Eliminar preguntas", "Volver", "Respuesta", "Marcar", "Desmarcar" ], [ "File name", "Remove questions", "Back", "Answer", "Mark", "Unmark" ] ], m5 = [ [ "PREGUNTA", "RESPUESTA", "Tama\u00f1o de letra", "Fondo", "listas" ], [ "QUESTION", "ANSWER", "Font size", "Background", "lists" ] ], ii = [ "<br /><br />----<br /><br />Antonio Tovar<br />antovar@260mb.com<br /><br />" ], prefs = new Array, VERSION = 0, IDIOMA = 1, P_TXT_TAM = 2, R_TXT_TAM = 3, P_TXT_R = 4, P_TXT_G = 5, P_TXT_B = 6, R_TXT_R = 7, R_TXT_G = 8, R_TXT_B = 9, P_FON_R = 10, P_FON_G = 11, P_FON_B = 12, R_FON_R = 13, R_FON_G = 14, R_FON_B = 15;
 
 // funciones.js
 
@@ -5548,7 +5539,7 @@ milog("sin acceso a prefs " + t.code), crea_prefs(e, !0);
 });
 }, function(t) {
 milog("no encuentro prefs " + t.code), graba_prefs(e, !0);
-}), carga_lista_inicial(e);
+}), carga_lista_inicial(e), eleccion_lista("inicio");
 }
 
 function gotPREFS_read(e) {
@@ -5649,18 +5640,20 @@ milog("code " + e.code + " leyendo .tst"), fbReseteo(!0);
 }, t.readAsText(e);
 }
 
-function eleccion_lista() {
-var e = dir_test.createReader();
-e.readEntries(filtra_listas, function(e) {
+function eleccion_lista(e) {
+var t = dir_test.createReader();
+t.readEntries(function(t) {
+filtra_listas(t, e);
+}, function(e) {
 milog("code " + e.code + " leyendo ficheros");
 });
 }
 
-function filtra_listas(e) {
+function filtra_listas(e, t) {
 console.log("filtra_lista");
-var t, n, r = [];
-for (t = 0; t < e.length; t++) e[t].name.substring(e[t].name.length - 4) == ".txt" && r.push(e[t].name.substring(0, e[t].name.length - 4) + estadis(e[t].name));
-milog(r.join(" ")), miTest.$.listas.setListas(r);
+var n, r, i = [];
+for (n = 0; n < e.length; n++) e[n].name.substring(e[n].name.length - 4) == ".txt" && i.push(e[n].name.substring(0, e[n].name.length - 4) + estadis(e[n].name));
+milog(i.join(" ")), miTest.$.principal.setListas(i.length), t == "eleccion" && miTest.$.listas.setListas(i);
 }
 
 function estadis(e) {
