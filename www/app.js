@@ -4469,9 +4469,6 @@ lis_actual: "",
 estadisticas: "",
 listas: 0
 },
-published: {
-listas_i: ""
-},
 fit: !0,
 components: [ {
 kind: "onyx.Toolbar",
@@ -4508,7 +4505,7 @@ name: "listas",
 style: "text-align: center; background-color: white; height: 36px",
 components: [ {
 name: "listas_i",
-content: "3 listos",
+content: "3 listas",
 style: "padding-top: 8px"
 } ]
 } ]
@@ -4701,7 +4698,7 @@ autoDismiss: !0,
 allowHtml: !0
 } ],
 create: function() {
-this.inherited(arguments), eleccion_lista("num_lis"), p1p1 = W < 241 ? 6 : 12, this.$.bg1.setStyle("padding: " + p1p1 + "px"), this.$.bg2.setStyle("padding-left: " + p1p1 + "px; padding-right: " + p1p1 + "px"), this.$.b_estadisticas.setStyle("margin-right: 9px");
+this.inherited(arguments), p1p1 = W < 241 ? 6 : 12, this.$.bg1.setStyle("padding: " + p1p1 + "px"), this.$.bg2.setStyle("padding-left: " + p1p1 + "px; padding-right: " + p1p1 + "px"), this.$.b_estadisticas.setStyle("margin-right: 9px");
 var e = W - 2 * p1p1;
 H < 321 ? (this.$.acciones.setStyle("margin: " + p1p1 + "px; width: " + (W / 2 - 1.5 * p1p1) + "px;" + "height: " + 1.2 + "cm"), this.$.opciones.setStyle("margin-top: " + p1p1 + "px; width: " + (W / 2 - 1.5 * p1p1) + "px;" + "height: " + 1.2 + "cm")) : (this.$.acciones.setStyle("margin: " + p1p1 + "px; width: " + e + "px; height: 1.5cm"), this.$.opciones.setStyle("margin-left: " + p1p1 + "px; width: " + e + "px; height: 1.5cm"));
 },
@@ -4731,7 +4728,7 @@ fb_reset_sn: function(e) {
 e == this.$.b_si && fbReseteo(!1), this.$.reset_sn.hide();
 },
 elige_lista: function() {
-this.$.b_estadisticas.setStyle("margin-right: 0px"), eleccion_lista("arr_lis");
+this.$.b_estadisticas.setStyle("margin-right: 0px"), eleccion_lista();
 },
 fb_acciones: function() {
 this.$.n_marcas.setContent(m3[this.x_idioma][0] + ": " + marcas.length), marcas.length ? (this.$.b_desmarcar.setDisabled(!1), this.$.b_marcas2fich.setDisabled(!1), this.$.b_borrar_marcadas.setDisabled(!1)) : (this.$.b_desmarcar.setDisabled(!0), this.$.b_marcas2fich.setDisabled(!0), this.$.b_borrar_marcadas.setDisabled(!0)), this.$.marcadas.show();
@@ -5652,20 +5649,18 @@ milog("code " + e.code + " leyendo .tst"), fbReseteo(!0);
 }, t.readAsText(e);
 }
 
-function eleccion_lista(e) {
-var t = dir_test.createReader();
-t.readEntries(function(t) {
-filtra_listas(t, e);
-}, function(e) {
+function eleccion_lista() {
+var e = dir_test.createReader();
+e.readEntries(filtra_listas, function(e) {
 milog("code " + e.code + " leyendo ficheros");
 });
 }
 
-function filtra_listas(e, t) {
+function filtra_listas(e) {
 console.log("filtra_lista");
-var n, r, i = [];
-for (n = 0; n < e.length; n++) e[n].name.substring(e[n].name.length - 4) == ".txt" && i.push(e[n].name.substring(0, e[n].name.length - 4) + estadis(e[n].name));
-milog(i.join(" ")), miTest.$.principal.setListas_i(i.length), t == "arr_lis" && miTest.$.listas.setListas(i);
+var t, n, r = [];
+for (t = 0; t < e.length; t++) e[t].name.substring(e[t].name.length - 4) == ".txt" && r.push(e[t].name.substring(0, e[t].name.length - 4) + estadis(e[t].name));
+milog(r.join(" ")), miTest.$.listas.setListas(r);
 }
 
 function estadis(e) {
