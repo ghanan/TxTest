@@ -4753,7 +4753,7 @@ ayuda: function(e, t) {
 this.log(this.x_idioma), this.log(this.x_idioma - 0 + 4), miTest.setIndex(this.x_idioma - 0 + 4);
 },
 fb_salir: function() {
-salvar_estado(), navigator.app.exitApp();
+nombre && salvar_estado(), navigator.app.exitApp();
 }
 });
 
@@ -5535,7 +5535,7 @@ milog("gotDIR"), dir_test = e, e.getFile("prefs.161", {
 create: !1
 }, function(t) {
 t.file(gotPREFS_read, function(t) {
-milog("sin acceso a prefs " + t.code), crea_prefs(e, !0);
+milog("sin acceso a prefs " + t.code), graba_prefs(e, !0);
 });
 }, function(t) {
 milog("no encuentro prefs " + t.code), graba_prefs(e, !0);
@@ -5548,7 +5548,7 @@ var t = new FileReader;
 t.onloadend = function(e) {
 prefs = e.target.result.split("\n"), actualiza_pantalla_inicial();
 }, t.onerror = function(e) {
-milog("error leyendo prefs " + e.code), crea_prefs(direc, !0);
+milog("error leyendo prefs " + e.code), graba_prefs(direc, !0);
 }, t.readAsText(e);
 }
 
