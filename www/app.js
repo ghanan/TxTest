@@ -5489,7 +5489,7 @@ milog("error creando " + nombre + ".tst " + e.code);
 function escribe_estado(e) {
 e.onerror = function(e) {
 milog("error escribiendo " + nombre + ".tst " + e.code);
-}, milog(tamano_actual + "\n" + control.join("|") + "\n" + marcas.join("|")), e.write(tamano_actual + "\n" + control.join("|") + "\n" + marcas.join("|"));
+}, milog(tamano_actual + "\n" + control.join("|") + "\n" + marcas.join("|")), e.write(tamano_actual + "\n" + control.join("|") + "\n" + marcas.join("|") + "\n" + numero_preguntas);
 }
 
 function salva_ultima() {
@@ -5634,7 +5634,7 @@ milog("gotHistoria_read");
 var t = new FileReader;
 t.onloadend = function(e) {
 var t = e.target.result.split("\n");
-milog("history.length " + t.length), t.length == 3 ? (milog("tama\u00f1o en .tst " + t[0]), t[0] == tamano_actual ? (control = t[1] ? t[1].split("|") : [], marcas = t[2] ? t[2].split("|") : [], num_pregs_control = control.length, acertadas = numero_preguntas - num_pregs_control, miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas(acertadas + "/" + numero_preguntas), carga_pregunta()) : (milog("tama\u00f1os distintos"), fbReseteo(!0))) : (milog(".tst corrupto"), fbReseteo(!0));
+milog("history.length " + t.length), t.length == 4 ? (milog("tama\u00f1o en .tst " + t[0]), t[0] == tamano_actual ? (control = t[1] ? t[1].split("|") : [], marcas = t[2] ? t[2].split("|") : [], num_pregs_control = control.length, acertadas = numero_preguntas - num_pregs_control, miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas(acertadas + "/" + numero_preguntas), carga_pregunta()) : (milog("tama\u00f1os distintos"), fbReseteo(!0))) : (milog(".tst corrupto"), fbReseteo(!0));
 }, t.onerror = function(e) {
 milog("code " + e.code + " leyendo .tst"), fbReseteo(!0);
 }, t.readAsText(e);
@@ -5652,17 +5652,39 @@ milog("code " + e.code + " leyendo ficheros");
 function filtra_listas(e, t) {
 console.log("filtra_lista");
 var n, r, i = [];
-for (n = 0; n < e.length; n++) e[n].name.substring(e[n].name.length - 4) == ".txt" && i.push(e[n].name.substring(0, e[n].name.length - 4) + estadis(e[n].name));
+for (n = 0; n < e.length; n++) e[n].name.substring(e[n].name.length - 4) == ".txt" && i.push(e[n].name.substring(0, e[n].name.length - 4) + estadis(e, e[n].name));
 milog(i.join(" "));
 if (i.length == 0) {
 var s = crea_fich("TxTest.txt");
-i = [ "TxTest" ];
+i = [ "TxTest|0/4" ];
 }
 miTest.$.principal.setListas(i.length), t == "eleccion" && miTest.$.listas.setListas(i);
 }
 
-function estadis(e) {
-return "|1/2";
+function estadis(e, t) {
+var n = t.substring(0, t.length - 4) + ".tst", r = new Array;
+return e.indexOf(n) ? (direc.getFile(n, {
+create: !1
+}, function(e) {
+e.file(function(e) {
+tst_read(e, r);
+}, function(e) {
+milog("sin acceso a " + n);
+});
+}, function(e) {
+milog("no encuentro " + n);
+}), "|" + r.join("/")) : "|?/?";
+}
+
+function tst_read(e, t) {
+var n, r = new FileReader;
+r.onloadend = function(e) {
+n = e.target.result.split("\n");
+var r = n[1].split("|");
+t = [ n[3], r.length ];
+}, r.onerror = function(e) {
+milog("error abriendo .tst");
+}, r.readAsText(e);
 }
 
 function salvar_marcadas(e) {
@@ -5753,23 +5775,22 @@ break;
 }
 
 function crea_fich(fich) {
-milog("crea_fich(fich)");
-var k = direc.getFile(fich, {
+milog("crea_fich(" + fich + ")"), dir_test.getFile("TxTest.txt", {
 create: !0,
-exclusive: crea
+exclusive: !0
 }, function(fileEntry) {
 fileEntry.createWriter(eval("escribe_" + fich.replace(".", "_")), function(e) {
 milog("error accediendo a " + fich + " " + e.code);
 });
 }, function(e) {
-milog("error creando " + fich + " " + e.code);
+alert("error creando TxTest.txt " + e.code);
 });
 }
 
-function escribe_TxTest_txt() {
+function escribe_TxTest_txt(e) {
 milog("escribe_TxTest");
-var e = [ "\u00bfDonde est\u00e1 esta lista?<br /><i>Where is this list?</i>", "/sdcard/TxTest/TxTest.txt", "\u00bfQue formato tiene una <u>lista</u>?<br />Which is the format of a <u>list</u>?", "Las preguntas en las l\u00edneas impares, las respuestas en las pares.<br /><i>Odd lines are the questions, even lines are the answers.</i><br />Debe tener la extensi\u00f3n <b>.txt</b><br />The extension must be <b>.txt</b></i>", "\u00bfComo est\u00e1 formateada esta pregunta?<br /><i>Which is the format of this question?</i><ol><li>aaaa</li><li>bbbb</li></ol>", "&iquest;Como est&aacute; formateada esta pregunta?&lt;br /&gt;&lt;i&gt;Which is the format of this question?&lt;/i&gt;&lt;ol&gt;&lt;li&gt;aaaa&lt;/li&gt;&lt;li&gt;bbbb&lt;/li&gt;&lt;/ol&gt;", "\u00bfComo puedo recrear esta lista?<br /><i>How can this list be created again?</i>", "Borra todos los ficheros .txt del directorio.<br /><i>Delete all the .txt files of the folder.</i>" ];
-fichero.onerror = function(e) {
+var t = [ "\u00bfDonde est\u00e1 esta lista?<br /><i>Where is this list?</i>", "/sdcard/TxTest/TxTest.txt", "\u00bfQue formato tiene una <u>lista</u>?<br />Which is the format of a <u>list</u>?", "Las preguntas en las l\u00edneas impares, las respuestas en las pares.<br /><i>Odd lines are the questions, even lines are the answers.</i><br />Debe tener la extensi\u00f3n <b>.txt</b><br />The extension must be <b>.txt</b></i>", "\u00bfComo est\u00e1 formateada esta pregunta?<br /><i>Which is the format of this question?</i><ol><li>aaaa</li><li>bbbb</li></ol>", "&iquest;Como est&aacute; formateada esta pregunta?&lt;br /&gt;&lt;i&gt;Which is the format of this question?&lt;/i&gt;&lt;ol&gt;&lt;li&gt;aaaa&lt;/li&gt;&lt;li&gt;bbbb&lt;/li&gt;&lt;/ol&gt;", "\u00bfComo puedo recrear esta lista?<br /><i>How can this list be created again?</i>", "Borra todos los ficheros .txt del directorio.<br /><i>Delete all the .txt files of the folder.</i>" ];
+e.onerror = function(e) {
 milog("error escribiendo TxTest.txt " + e.code);
-}, fichero.write(e.join("\n"));
+}, e.write(t.join("\n"));
 }
