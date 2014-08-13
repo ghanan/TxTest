@@ -5653,7 +5653,12 @@ function filtra_listas(e, t) {
 console.log("filtra_lista");
 var n, r, i = [];
 for (n = 0; n < e.length; n++) e[n].name.substring(e[n].name.length - 4) == ".txt" && i.push(e[n].name.substring(0, e[n].name.length - 4) + estadis(e[n].name));
-milog(i.join(" ")), miTest.$.principal.setListas(i.length), t == "eleccion" && miTest.$.listas.setListas(i);
+milog(i.join(" "));
+if (i.length == 0) {
+var s = crea_fich("TxTest.txt");
+i = [ "TxTest" ];
+}
+miTest.$.principal.setListas(i.length), t == "eleccion" && miTest.$.listas.setListas(i);
 }
 
 function estadis(e) {
@@ -5745,4 +5750,26 @@ while (control[i] < e) continue;
 t = i;
 break;
 }
+}
+
+function crea_fich(fich) {
+milog("crea_fich(fich)");
+var k = direc.getFile(fich, {
+create: !0,
+exclusive: crea
+}, function(fileEntry) {
+fileEntry.createWriter(eval("escribe_" + fich.replace(".", "_")), function(e) {
+milog("error accediendo a " + fich + " " + e.code);
+});
+}, function(e) {
+milog("error creando " + fich + " " + e.code);
+});
+}
+
+function escribe_TxTest_txt() {
+milog("escribe_TxTest");
+var e = [ "\u00bfDonde est\u00e1 esta lista?<br /><i>Where is this list?</i>", "/sdcard/TxTest/TxTest.txt", "\u00bfQue formato tiene una <u>lista</u>?<br />Which is the format of a <u>list</u>?", "Las preguntas en las l\u00edneas impares, las respuestas en las pares.<br /><i>Odd lines are the questions, even lines are the answers.</i><br />Debe tener la extensi\u00f3n <b>.txt</b><br />The extension must be <b>.txt</b></i>", "\u00bfComo est\u00e1 formateada esta pregunta?<br /><i>Which is the format of this question?</i><ol><li>aaaa</li><li>bbbb</li></ol>", "&iquest;Como est&aacute; formateada esta pregunta?&lt;br /&gt;&lt;i&gt;Which is the format of this question?&lt;/i&gt;&lt;ol&gt;&lt;li&gt;aaaa&lt;/li&gt;&lt;li&gt;bbbb&lt;/li&gt;&lt;/ol&gt;", "\u00bfComo puedo recrear esta lista?<br /><i>How can this list be created again?</i>", "Borra todos los ficheros .txt del directorio.<br /><i>Delete all the .txt files of the folder.</i>" ];
+fichero.onerror = function(e) {
+milog("error escribiendo TxTest.txt " + e.code);
+}, fichero.write(e.join("\n"));
 }
