@@ -5656,35 +5656,13 @@ for (n = 0; n < e.length; n++) e[n].name.substring(e[n].name.length - 4) == ".tx
 milog(i.join(" "));
 if (i.length == 0) {
 var s = crea_fich("TxTest.txt");
-i = [ "TxTest|0/4" ];
+i = [ "TxTest" ];
 }
 miTest.$.principal.setListas(i.length), t == "eleccion" && miTest.$.listas.setListas(i);
 }
 
 function estadis(e, t) {
-var n = t.substring(0, t.length - 4) + ".tst", r = new Array;
-return e.indexOf(n) ? (direc.getFile(n, {
-create: !1
-}, function(e) {
-e.file(function(e) {
-tst_read(e, r);
-}, function(e) {
-milog("sin acceso a " + n);
-});
-}, function(e) {
-milog("no encuentro " + n);
-}), "|" + r.join("/")) : "|?/?";
-}
-
-function tst_read(e, t) {
-var n, r = new FileReader;
-r.onloadend = function(e) {
-n = e.target.result.split("\n");
-var r = n[1].split("|");
-t = [ n[3], r.length ];
-}, r.onerror = function(e) {
-milog("error abriendo .tst");
-}, r.readAsText(e);
+return "|1/2";
 }
 
 function salvar_marcadas(e) {
