@@ -5656,7 +5656,7 @@ for (n = 0; n < e.length; n++) e[n].name.substring(e[n].name.length - 4) == ".tx
 milog(i.join(" "));
 if (i.length == 0) {
 var s = crea_fich("TxTest.txt");
-i = [ "TxTest" ];
+i = [ "TxTest|0/4" ];
 }
 miTest.$.principal.setListas(i.length), t == "eleccion" && miTest.$.listas.setListas(i);
 }
