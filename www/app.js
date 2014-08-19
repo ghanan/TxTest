@@ -5650,54 +5650,49 @@ milog("code " + e.code + " leyendo ficheros");
 }
 
 function filtra_listas(e, t) {
-milog("filtra_lista");
 var n, r, i, s = [];
-for (n = 0; n < e.length; n++) e[n].name.substring(e[n].name.length - 4) == ".txt" && (i = estadis(e, e[n].name), alert("e: " + i), s.push(e[n].name.substring(0, e[n].name.length - 4) + i));
+for (n = 0; n < e.length; n++) e[n].name.substring(e[n].name.length - 4) == ".txt" && s.push(e[n].name.substring(0, e[n].name.length - 4));
 if (s.length == 0) {
 var o = crea_fich("TxTest.txt");
 s = [ "TxTest|0/4" ];
+} else if (t == "eleccion") {
+num_estad = 0;
+for (n = 0; n < s.length; n++) estadisticas(e, s, n);
 }
-miTest.$.principal.setListas(s.length), t == "eleccion" && miTest.$.listas.setListas(s);
+miTest.$.principal.setListas(s.length);
 }
 
-function estadis(e, t) {
-var n = t.substring(0, t.length - 4) + ".tst", r = new Array, i = "|?/?";
-for (var s = 0; s < e.length; s++) {
-alert(e[s].name);
-if (e[s].name == n) {
-dir_test.getFile(n, {
+function estadisticas(e, t, n) {
+var r = t[n] + ".tst", i = !1;
+for (var s = 0; s < e.length; s++) if (e[s].name == r) {
+dir_test.getFile(r, {
 create: !1
 }, function(e) {
 e.file(function(e) {
-alert("infunction");
-var t = new FileReader;
-t.onloadend = function(e) {
-var t = e.target.result.split("\n"), n = t[1].split("|");
-r = [ t[3] - n.length, t[3] ];
-}, t.onerror = function(e) {
-milog("error abriendo .tst");
-}, t.readAsText(e);
+tst_read(e, t, n);
 }, function(e) {
-alert("sin acceso a " + n);
+t[n] += "|?/?", final_estadisticas(t);
 });
 }, function(e) {
-alert("no encuentro " + n);
-}), alert("pre return"), i = "|" + r.join("/");
+t[n] += "|?/?", final_estadisticas(t);
+}), i = !0;
 break;
 }
-}
-return i;
+i || (t[n] += "|?/?", final_estadisticas(t));
 }
 
-function tst_read(e, t) {
-alert("tst_read " + e.name);
-var n = new FileReader;
-n.onloadend = function(e) {
-var n = e.target.result.split("\n"), r = n[1].split("|");
-t = [ n[3] - r.length, n[3] ];
-}, n.onerror = function(e) {
-milog("error abriendo .tst");
-}, n.readAsText(e);
+function tst_read(e, t, n) {
+var r = new FileReader;
+r.onloadend = function(e) {
+var r = e.target.result.split("\n"), s = r[1].split("|");
+t[n] += "|" + (r[3] - s.length) + "/" + r[3], final_estadisticas(t);
+}, r.onerror = function(e) {
+t[n] += "|?/?", final_estadisticas(t);
+}, r.readAsText(e);
+}
+
+function final_estadisticas(e) {
+num_estad += 1, num_estad == e.length && miTest.$.listas.setListas(e);
 }
 
 function salvar_marcadas(e) {
