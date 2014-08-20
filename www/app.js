@@ -4966,7 +4966,7 @@ setup_item: function(e, t) {
 return this.$.nom_lista.setContent(this.listas[t.index].split("|")[0]), this.$.estad.setContent(this.listas[t.index].split("|")[1]), !0;
 },
 i_tap: function(e, t) {
-return nombre != this.listas[t.index].split("|")[0] ? (salvar_estado(), abre_lista(this.listas[t.index].split("|")[0] + ".txt")) : alert("es la misma"), miTest.setIndex(0), !0;
+return salvar_estado(), abre_lista(this.listas[t.index].split("|")[0] + ".txt"), miTest.setIndex(0), !0;
 }
 });
 
@@ -5474,7 +5474,7 @@ milog("limpiar"), nombre = "", numero_preguntas = 0, acertadas = 0;
 }
 
 function salvar_estado() {
-dir_test.getFile(nombre + ".tst", {
+nombre && dir_test.getFile(nombre + ".tst", {
 create: !0,
 exclusive: !1
 }, function(e) {
