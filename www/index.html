@@ -22,7 +22,8 @@
                 alert('No application build found, redirecting to debug.html.');
                 location = 'debug.html';
             }
-	    enyo.dispatcher.listen(document, "deviceready");
+            enyo.dispatcher.listen(document, "deviceready");
+            enyo.dispatcher.listen(window, "unload");
             miTest = new App()
             miTest.renderInto(document.body);
         </script>
