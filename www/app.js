@@ -4732,7 +4732,7 @@ fb_quitar_marcas: function() {
 this.$.marcadas.hide(), this.$.b_todas.setContent(m3[this.x_idioma][4]), this.$.p_todas.show();
 },
 fb_todas: function() {
-this.$.p_todas.hide(), this.$.b_todas.getContent() == m3[this.x_idioma][4] ? marcas.length = 0 : borrar_marcadas();
+this.$.p_todas.hide(), this.$.b_todas.getContent() == m3[this.x_idioma][4] ? (marcas.length = 0, salvar = !0) : borrar_marcadas();
 },
 fb_marcas2fich: function() {
 this.$.marcadas.hide(), this.$.i_nom_fich.setValue(""), this.$.b_grabar.setDisabled(!0), this.$.p_nom_fichero.show();
@@ -4911,10 +4911,10 @@ fb_volver: function() {
 miTest.setIndex(0);
 },
 fb_marcar: function() {
-marcada ? quita_marca(control[indice_control]) : marcas.push(control[indice_control]), marcada = !marcada, this.$.b_marcar.setContent(marcada ? m4[this.x_idioma][5] : m4[this.x_idioma][4]), this.$.botones.reflow();
+marcada ? quita_marca(control[indice_control]) : marcas.push(control[indice_control]), marcada = !marcada, this.$.b_marcar.setContent(marcada ? m4[this.x_idioma][5] : m4[this.x_idioma][4]), this.$.botones.reflow(), salvar = !0;
 },
 fb_correcto: function() {
-this.$.b_correcto.setFit(!1), this.$.b_correcto.hide(), this.$.b_error.hide(), this.$.b_marcar.hide(), this.$.b_respuesta.show(), this.$.b_volver.show(), this.$.b_respuesta.setFit(!0), this.$.botones.reflow(), control = control.slice(0, indice_control).concat(control.slice(indice_control + 1, num_pregs_control)), num_pregs_control--, acertadas++, miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), this.$.b_estadisticas.setContent(acertadas + "/" + numero_preguntas), num_pregs_control != 0 ? carga_pregunta() : miTest.setIndex(0);
+this.$.b_correcto.setFit(!1), this.$.b_correcto.hide(), this.$.b_error.hide(), this.$.b_marcar.hide(), this.$.b_respuesta.show(), this.$.b_volver.show(), this.$.b_respuesta.setFit(!0), this.$.botones.reflow(), control = control.slice(0, indice_control).concat(control.slice(indice_control + 1, num_pregs_control)), num_pregs_control--, acertadas++, salvar = !0, miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), this.$.b_estadisticas.setContent(acertadas + "/" + numero_preguntas), num_pregs_control != 0 ? carga_pregunta() : miTest.setIndex(0);
 },
 fb_error: function(e) {
 this.$.b_correcto.setFit(!1), this.$.b_correcto.hide(), this.$.b_error.hide(), this.$.b_marcar.hide(), this.$.b_respuesta.show(), this.$.b_volver.show(), this.$.b_respuesta.setFit(!0), this.$.botones.reflow(), carga_pregunta();
@@ -5435,7 +5435,7 @@ function prefs_default() {
 prefs[VERSION] = "1", prefs[IDIOMA] = "0", prefs[P_TXT_TAM] = 100, prefs[R_TXT_TAM] = 100, prefs[P_TXT_R] = 255, prefs[P_TXT_G] = 255, prefs[P_TXT_B] = 0, prefs[R_TXT_R] = 255, prefs[R_TXT_G] = 255, prefs[R_TXT_B] = 255, prefs[P_FON_R] = 25, prefs[P_FON_G] = 25, prefs[P_FON_B] = 112, prefs[R_FON_R] = 139, prefs[R_FON_G] = 79, prefs[R_FON_B] = 87;
 }
 
-var VERSION_ACTUAL = "1", logs = "", miTest, dir_test, H, W, marcada = !1, nombre = "", nombre_prox = "", ultima = "", tamano = 0, tamano_actual = 0, numero_preguntas = 0, lista = new Array, num_preg = 0, acertadas = 0, control = new Array, marcas = new Array, indice_control = 0, num_pregs_control = 0, m1 = [ [ "Si", "Salir", "Preferencias", "Cancelar", "Grabar", "Aplicar", "No", "Si" ], [ "Yes", "Exit", "Preferences", "Cancel", "Save", "Apply", "No", "Ok" ] ], m2 = [ [ "DISPONIBLES", "LISTA ACTUAL", "Marcadas", "Empezar", "\u00bfReiniciar acertadas?" ], [ "AVAILABLE", "CURRENT LIST", "Marked", "Start", "Reset corrects?" ] ], m3 = [ [ "N\u00fam. marcas", "Desmarcar todas", "Fichero con marcadas", "Borrar marcadas", "Quitar todas las marcas" ], [ "Num. marks", "Unmark all", "Marked to file", "Remove marked", "Remove all marks" ] ], m4 = [ [ "Nombre del fichero", "Eliminar preguntas", "Volver", "Respuesta", "Marcar", "Desmarcar" ], [ "File name", "Remove questions", "Back", "Answer", "Mark", "Unmark" ] ], m5 = [ [ "PREGUNTA", "RESPUESTA", "Tama\u00f1o de letra", "Fondo", "listas" ], [ "QUESTION", "ANSWER", "Font size", "Background", "lists" ] ], ii = [ "<br /><br />----<br /><br />Antonio Tovar<br />antovar@260mb.com<br /><br />" ], prefs = new Array, VERSION = 0, IDIOMA = 1, P_TXT_TAM = 2, R_TXT_TAM = 3, P_TXT_R = 4, P_TXT_G = 5, P_TXT_B = 6, R_TXT_R = 7, R_TXT_G = 8, R_TXT_B = 9, P_FON_R = 10, P_FON_G = 11, P_FON_B = 12, R_FON_R = 13, R_FON_G = 14, R_FON_B = 15;
+var VERSION_ACTUAL = "1", logs = "", miTest, dir_test, H, W, marcada = !1, salvar = !1, nombre = "", nombre_prox = "", ultima = "", tamano = 0, tamano_actual = 0, numero_preguntas = 0, lista = new Array, num_preg = 0, acertadas = 0, control = new Array, marcas = new Array, indice_control = 0, num_pregs_control = 0, m1 = [ [ "Si", "Salir", "Preferencias", "Cancelar", "Grabar", "Aplicar", "No", "Si" ], [ "Yes", "Exit", "Preferences", "Cancel", "Save", "Apply", "No", "Ok" ] ], m2 = [ [ "DISPONIBLES", "LISTA ACTUAL", "Marcadas", "Empezar", "\u00bfReiniciar acertadas?" ], [ "AVAILABLE", "CURRENT LIST", "Marked", "Start", "Reset corrects?" ] ], m3 = [ [ "N\u00fam. marcas", "Desmarcar todas", "Fichero con marcadas", "Borrar marcadas", "Quitar todas las marcas" ], [ "Num. marks", "Unmark all", "Marked to file", "Remove marked", "Remove all marks" ] ], m4 = [ [ "Nombre del fichero", "Eliminar preguntas", "Volver", "Respuesta", "Marcar", "Desmarcar" ], [ "File name", "Remove questions", "Back", "Answer", "Mark", "Unmark" ] ], m5 = [ [ "PREGUNTA", "RESPUESTA", "Tama\u00f1o de letra", "Fondo", "listas" ], [ "QUESTION", "ANSWER", "Font size", "Background", "lists" ] ], ii = [ "<br /><br />----<br /><br />Antonio Tovar<br />antovar@260mb.com<br /><br />" ], prefs = new Array, VERSION = 0, IDIOMA = 1, P_TXT_TAM = 2, R_TXT_TAM = 3, P_TXT_R = 4, P_TXT_G = 5, P_TXT_B = 6, R_TXT_R = 7, R_TXT_G = 8, R_TXT_B = 9, P_FON_R = 10, P_FON_G = 11, P_FON_B = 12, R_FON_R = 13, R_FON_G = 14, R_FON_B = 15;
 
 // funciones.js
 
@@ -5454,7 +5454,7 @@ logs = logs + e + "<br />\n";
 function fbReseteo(e) {
 milog("fbReseteo"), control = new Array;
 for (var t = 0; t < numero_preguntas; t++) control.push(t * 2);
-num_pregs_control = numero_preguntas, acertadas = 0, e && (e = new Array), miTest.$.principal.setEstadisticas("0/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas("0/" + numero_preguntas), carga_pregunta();
+num_pregs_control = numero_preguntas, acertadas = 0, e && (e = new Array), miTest.$.principal.setEstadisticas("0/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas("0/" + numero_preguntas), salvar = !0, carga_pregunta();
 }
 
 function carga_pregunta() {
@@ -5478,7 +5478,7 @@ milog("limpiar"), nombre = "", numero_preguntas = 0, acertadas = 0;
 }
 
 function salvar_estado() {
-nombre && dir_test.getFile(nombre + ".tst", {
+salvar && nombre && dir_test.getFile(nombre + ".tst", {
 create: !0,
 exclusive: !1
 }, function(e) {
@@ -5491,7 +5491,9 @@ milog("error creando " + nombre + ".tst " + e.code);
 }
 
 function escribe_estado(e) {
-e.onerror = function(e) {
+e.onwrite = function(e) {
+salvar = !1;
+}, e.onerror = function(e) {
 milog("error escribiendo " + nombre + ".tst " + e.code);
 }, milog(tamano_actual + "\n" + control.join("|") + "\n" + marcas.join("|")), e.write(tamano_actual + "\n" + control.join("|") + "\n" + marcas.join("|") + "\n" + numero_preguntas);
 }
