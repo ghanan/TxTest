@@ -4429,7 +4429,9 @@ fit: !0,
 components: [ {
 kind: "Signals",
 ondeviceready: "deviceReady",
-onunload: "unload"
+onunload: "unload",
+onpause: "pausa",
+onmenubutton: "config"
 }, {
 name: "principal",
 kind: "Principal"
@@ -4450,10 +4452,16 @@ name: "ingles",
 kind: "Ingles"
 } ],
 deviceReady: function(e, t) {
-W = screen.width, H = screen.height, console.log(W + "x" + H), inicio_getFS();
+W = screen.width, H = screen.height, console.log(W + "x" + H), enyo.dispatcher.listen(document, "pause"), enyo.dispatcher.listen(document, "menubutton"), inicio_getFS();
 },
 unload: function(e, t) {
-nombre && salvar_estado();
+salvar_estado();
+},
+pausa: function(e, t) {
+salvar_estado();
+},
+config: function(e, t) {
+miTest.setIndex(3);
 },
 x_idiomaChanged: function() {
 this.$.principal.setX_idioma(this.x_idioma), this.$.preg_resp.setX_idioma(this.x_idioma), this.$.opciones.setX_idioma(this.x_idioma);
@@ -5380,7 +5388,6 @@ content: "TxTest",
 style: "text-align: center; padding-top: 3px"
 } ]
 }, {
-name: "mlogs",
 kind: "Scroller",
 fit: !0,
 components: [ {
@@ -5395,7 +5402,7 @@ style: "text-align: center",
 ontap: "volver"
 } ],
 volver: function() {
-alert(logs), this.$.mlogs.setContent(logs), miTest.setIndex(0);
+miTest.setIndex(0);
 }
 });
 
@@ -5536,7 +5543,7 @@ break;
 // preferencias.js
 
 function inicio_getFS() {
-milog("inicio"), window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(e) {
+window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(e) {
 e.root.getDirectory("TxTest", {
 create: !0,
 exclusive: !1
@@ -5545,7 +5552,7 @@ exclusive: !1
 }
 
 function gotDIR(e) {
-milog("gotDIR"), dir_test = e, e.getFile("prefs.161", {
+dir_test = e, e.getFile("prefs.161", {
 create: !1
 }, function(t) {
 t.file(gotPREFS_read, function(t) {
@@ -5566,7 +5573,7 @@ milog("error leyendo prefs " + e.code), graba_prefs(direc, !0);
 }
 
 function actualiza_pantalla_inicial() {
-milog("actualiza_pantalla_inical"), miTest.setX_idioma(prefs[IDIOMA]), miTest.$.preg_resp.setX_actualizar(Math.random());
+miTest.setX_idioma(prefs[IDIOMA]), miTest.$.preg_resp.setX_actualizar(Math.random());
 }
 
 function graba_prefs(e, t) {
@@ -5587,7 +5594,7 @@ milog("error creando prefs " + e.code);
 }
 
 function escribe_prefs(e) {
-milog("escribe_prefs"), e.onwrite = function(e) {
+e.onwrite = function(e) {
 actualiza_pantalla_inicial();
 }, e.onerror = function(e) {
 milog("error escribiendo prefs " + e.code);
