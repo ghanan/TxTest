@@ -4447,9 +4447,6 @@ kind: "Opciones"
 }, {
 name: "espanol",
 kind: "Espanol"
-}, {
-name: "ingles",
-kind: "Ingles"
 } ],
 deviceReady: function(e, t) {
 W = screen.width, H = screen.height, console.log(W + "x" + H), enyo.dispatcher.listen(document, "pause"), enyo.dispatcher.listen(document, "menubutton"), inicio_getFS();
@@ -4461,7 +4458,7 @@ pausa: function(e, t) {
 salvar_estado();
 },
 config: function(e, t) {
-miTest.setIndex(3);
+miTest.$.opciones.setX_actualiza(Math.random()), miTest.setIndex(3);
 },
 x_idiomaChanged: function() {
 this.$.principal.setX_idioma(this.x_idioma), this.$.preg_resp.setX_idioma(this.x_idioma), this.$.opciones.setX_idioma(this.x_idioma);
@@ -4474,7 +4471,6 @@ enyo.kind({
 name: "Principal",
 kind: "enyo.FittableRows",
 classes: "onyx",
-alt_bot: 0,
 published: {
 x_idioma: "0",
 lis_actual: "",
@@ -4762,7 +4758,7 @@ fb_opciones: function() {
 this.$.b_estadisticas.setStyle("margin-right: 0px"), miTest.$.opciones.setX_actualiza(Math.random()), miTest.setIndex(3);
 },
 ayuda: function(e, t) {
-this.log(this.x_idioma), this.log(this.x_idioma - 0 + 4), miTest.setIndex(this.x_idioma - 0 + 4);
+miTest.$.espanol.setX_idioma(this.x_idioma), miTest.setIndex(4);
 },
 fb_salir: function() {
 nombre && salvar_estado(), navigator.app.exitApp();
@@ -5376,7 +5372,7 @@ kind: "enyo.FittableRows",
 classes: "onyx",
 fit: !0,
 published: {
-x_idioma: "0"
+x_idioma: 9
 },
 components: [ {
 kind: "onyx.Toolbar",
@@ -5391,9 +5387,10 @@ style: "text-align: center; padding-top: 3px"
 kind: "Scroller",
 fit: !0,
 components: [ {
+name: "panta",
 allowHtml: !0,
 style: "padding: 10px",
-content: "<br />Autor: Antonio Tovar<br />antovar@260mb.com<br /><br />Ayuda:<br /><br />Toca en DISPONIBLES para elegir lista.<br /><br />Toca en nn/nn para reiniciar acertadas.<br /><br />Los ficheros deben tener en las l\u00edneas impares las preguntas y en las pares las respuestas (una sola l\u00ednea en cada caso).<br /><br />Las l\u00edneas pueden incluir c\u00f3digo html.<br /><br />Los ficheros deben colocarse en /sdcard/TxTest y tener extensi\u00f3n .txt"
+content: "<br />Author: Antonio Tovar<br />antovar@260mb.com<br /><br />Ayuda:<br /><br />Toca en DISPONIBLES para elegir lista.<br /><br />Toca en nn/nn para reiniciar acertadas.<br /><br />Los ficheros deben tener en las l\u00edneas impares las preguntas y en las pares las respuestas (una sola l\u00ednea en cada caso).<br /><br />Las l\u00edneas pueden incluir c\u00f3digo html.<br /><br />Los ficheros deben colocarse en /sdcard/TxTest y tener extensi\u00f3n .txt"
 } ]
 }, {
 kind: "onyx.Toolbar",
@@ -5401,44 +5398,9 @@ content: "<< << <<",
 style: "text-align: center",
 ontap: "volver"
 } ],
-volver: function() {
-miTest.setIndex(0);
-}
-});
-
-// k_ingles.js
-
-enyo.kind({
-name: "Ingles",
-kind: "enyo.FittableRows",
-classes: "onyx",
-fit: !0,
-published: {
-x_idioma: "0"
+x_idiomaChanged: function() {
+this.x_idioma == 0 ? this.$.panta.setContent("<br />Autor: Antonio Tovar<br />antovar@260mb.com<br /><br />Ayuda:<br /><br />Toca en DISPONIBLES para elegir lista.<br /><br />Toca en nn/nn para reiniciar acertadas.<br /><br />Los ficheros deben tener en las l\u00edneas impares las preguntas y en las pares las respuestas (una sola l\u00ednea en cada caso).<br /><br />Las l\u00edneas pueden incluir c\u00f3digo html.<br /><br />Los ficheros deben colocarse en /sdcard/TxTest y tener extensi\u00f3n .txt") : this.$.panta.setContent("<br />Author: Antonio Tovar<br />antovar@260mb.com<br /><br />Help:<br /><br />Tap on AVAILABLES to choose list.<br /><br />Tap on nn/nn to reset corrects.<br /><br />Files must have questions in odd lines and answers in even lines (only one line in any case).<br /><br />Lines may include html code.<br /><br />Files must be copied to /sdcard/TxTest and have .txt extension.");
 },
-components: [ {
-kind: "onyx.Toolbar",
-layoutKind: "FittableColumnsLayout",
-style: "height: 57px",
-components: [ {
-fit: !0,
-content: "TxTest",
-style: "text-align: center; padding-top: 3px"
-} ]
-}, {
-kind: "Scroller",
-fit: !0,
-components: [ {
-allowHtml: !0,
-style: "padding: 10px",
-content: "<br />Author: Antonio Tovar<br />antovar@260mb.com<br /><br />Help:<br /><br />Tap on AVAILABLES to choose list.<br /><br />Tap on nn/nn to reset corrects.<br /><br />Files must have questions in odd lines and answers in even lines (only one line in any case).<br /><br />Lines may include html code.<br /><br />Files must be copied to /sdcard/TxTest and have .txt extension."
-} ]
-}, {
-kind: "onyx.Toolbar",
-content: "<< << <<",
-style: "text-align: center",
-ontap: "volver"
-} ],
 volver: function() {
 miTest.setIndex(0);
 }
