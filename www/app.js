@@ -4424,6 +4424,7 @@ kind: "Panels",
 published: {
 x_idioma: 0
 },
+draggable: !1,
 animate: !1,
 fit: !0,
 components: [ {
