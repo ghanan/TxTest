@@ -4698,7 +4698,7 @@ ontap: "fb_cancelar"
 } ]
 } ],
 create: function() {
-console.log("create"), this.inherited(arguments), p1p1 = W < 241 ? 6 : 12, this.$.bg1.setStyle("padding: " + p1p1 + "px"), this.$.bg2.setStyle("padding-left: " + p1p1 + "px; padding-right: " + p1p1 + "px"), this.$.b_estadisticas.setStyle("margin-right: 9px");
+this.inherited(arguments), p1p1 = W < 241 ? 6 : 12, this.$.bg1.setStyle("padding: " + p1p1 + "px"), this.$.bg2.setStyle("padding-left: " + p1p1 + "px; padding-right: " + p1p1 + "px"), this.$.b_estadisticas.setStyle("margin-right: 9px");
 var e = W - 2 * p1p1;
 this.$.acciones.hide(), this.$.opciones.hide(), H < 321 ? (this.$.acciones.setStyle("margin: " + p1p1 + "px; width: " + (W / 2 - 1.5 * p1p1) + "px;" + "height: " + 1.2 + "cm"), this.$.opciones.setStyle("margin-top: " + p1p1 + "px; width: " + (W / 2 - 1.5 * p1p1) + "px;" + "height: " + 1.2 + "cm")) : (this.$.acciones.setStyle("margin: " + p1p1 + "px; width: " + e + "px; height: 1.5cm"), this.$.opciones.setStyle("margin-left: " + p1p1 + "px; width: " + e + "px; height: 1.5cm"));
 },
@@ -4716,7 +4716,7 @@ estadisticasChanged: function() {
 this.$.b_estadisticas.setContent(this.estadisticas), this.$.tLisAct2.reflow();
 },
 listasChanged: function() {
-console.log("listasChanged"), this.$.listas_i.setContent(this.listas + " " + m5[this.x_idioma][4]);
+this.$.listas_i.setContent(this.listas + " " + m5[this.x_idioma][4]);
 },
 fb_estadisticas: function() {
 this.$.reset_sn.show();
@@ -5417,10 +5417,6 @@ var VERSION_ACTUAL = "1", logs = "", miTest, dir_test, H, W, marcada = !1, salva
 
 // funciones.js
 
-function fallo_wr_pref(e) {
-console.log("Error wr prefs: " + e.code);
-}
-
 function fallo_fs(e) {
 alert("FileSys Error: " + e.code), navigator.app.exitApp();
 }
@@ -5430,7 +5426,7 @@ logs = logs + e + "<br />\n";
 }
 
 function fbReseteo(e) {
-milog("fbReseteo"), control = new Array;
+control = new Array;
 for (var t = 0; t < numero_preguntas; t++) control.push(t * 2);
 num_pregs_control = numero_preguntas, acertadas = 0, e && (e = new Array), miTest.$.principal.setEstadisticas("0/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas("0/" + numero_preguntas), salvar = !0, carga_pregunta();
 }
@@ -5452,7 +5448,7 @@ return !1;
 }
 
 function limpiar(e) {
-milog("limpiar"), nombre = "", numero_preguntas = 0, acertadas = 0;
+nombre = "", numero_preguntas = 0, acertadas = 0;
 }
 
 function salvar_estado() {
@@ -5519,11 +5515,9 @@ dir_test = e, e.getFile("prefs.161", {
 create: !1
 }, function(t) {
 t.file(gotPREFS_read, function(t) {
-milog("sin acceso a prefs " + t.code), graba_prefs(e, !0);
+graba_prefs(e, !0);
 });
-}, function(t) {
-milog("no encuentro prefs " + t.code), graba_prefs(e, !0);
-}), carga_lista_inicial(e), eleccion_lista("inicio");
+}, function(e) {}), carga_lista_inicial(e), eleccion_lista("inicio");
 }
 
 function gotPREFS_read(e) {
@@ -5531,7 +5525,7 @@ var t = new FileReader;
 t.onloadend = function(e) {
 prefs = e.target.result.split("\n"), prefs[IDIOMA] = prefs[IDIOMA] - 0, actualiza_pantalla_inicial();
 }, t.onerror = function(e) {
-milog("error leyendo prefs " + e.code), graba_prefs(direc, !0);
+graba_prefs(direc, !0);
 }, t.readAsText(e);
 }
 
@@ -5548,55 +5542,39 @@ prefs_default("Spanish");
 create: !0,
 exclusive: t
 }, function(e) {
-e.createWriter(escribe_prefs, function(e) {
-milog("error accediendo a prefs " + e.code);
-});
-}, function(e) {
-milog("error creando prefs " + e.code);
-});
+e.createWriter(escribe_prefs, function(e) {});
+}, function(e) {});
 }
 
 function escribe_prefs(e) {
 e.onwrite = function(e) {
 actualiza_pantalla_inicial();
-}, e.onerror = function(e) {
-milog("error escribiendo prefs " + e.code);
-}, e.write(prefs.join("\n"));
+}, e.onerror = function(e) {}, e.write(prefs.join("\n"));
 }
 
 // listas.js
 
 function carga_lista_inicial(e) {
-milog("carga_lista_inicial"), e.getFile("ultima.161", {
+e.getFile("ultima.161", {
 create: !1
 }, function(e) {
-e.file(gotUltima_read, function(e) {
-milog("sin acceso a ultima");
-});
-}, function(e) {
-milog("no encuentro ultima");
-});
+e.file(gotUltima_read, function(e) {});
+}, function(e) {});
 }
 
 function gotUltima_read(e) {
 var t = new FileReader;
 t.onloadend = function(e) {
-ultima = e.target.result.split("\n")[0], milog("ultima: " + ultima), abre_lista(ultima);
-}, t.onerror = function(e) {
-milog("error abriendo " + ultima);
-}, t.readAsText(e);
+ultima = e.target.result.split("\n")[0], abre_lista(ultima);
+}, t.onerror = function(e) {}, t.readAsText(e);
 }
 
 function abre_lista(e) {
 nombre_prox = e.substring(0, e.length - 4), control = new Array, marcas = new Array, dir_test.getFile(e, {
 create: !1
-}, function(t) {
-t.file(gotLISTA_read, function(t) {
-milog("err " + t.code + " accediendo " + e);
-});
-}, function(t) {
-milog("err " + t.code + " obteniendo " + e);
-});
+}, function(e) {
+e.file(gotLISTA_read, function(e) {});
+}, function(e) {});
 }
 
 function gotLISTA_read(e) {
@@ -5606,23 +5584,21 @@ nombre = nombre_prox, miTest.$.principal.setLis_actual(nombre), miTest.$.preg_re
 create: !1
 }, function(e) {
 e.file(gotHistoria_read, function(e) {
-milog("code " + e.code + " accediendo .tst"), fbReseteo(!0);
+fbReseteo(!0);
 });
 }, function(e) {
-milog("code " + e.code + " obteniendo .tst"), fbReseteo(!0);
+fbReseteo(!0);
 });
-}, t.onerror = function(e) {
-milog("err " + e.code + " leyendo lista");
-}, t.readAsText(e);
+}, t.onerror = function(e) {}, t.readAsText(e);
 }
 
 function gotHistoria_read(e) {
 var t = new FileReader;
 t.onloadend = function(e) {
 var t = e.target.result.split("\n");
-t.length == 4 ? t[0] == tamano_actual ? (control = t[1] ? t[1].split("|") : [], marcas = t[2] ? t[2].split("|") : [], num_pregs_control = control.length, acertadas = numero_preguntas - num_pregs_control, miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas(acertadas + "/" + numero_preguntas), carga_pregunta()) : (milog("tama\u00f1os distintos"), fbReseteo(!0)) : (milog(".tst corrupto"), fbReseteo(!0));
+t.length == 4 ? t[0] == tamano_actual ? (control = t[1] ? t[1].split("|") : [], marcas = t[2] ? t[2].split("|") : [], num_pregs_control = control.length, acertadas = numero_preguntas - num_pregs_control, miTest.$.principal.setEstadisticas(acertadas + "/" + numero_preguntas), miTest.$.preg_resp.setEstadisticas(""), miTest.$.preg_resp.setEstadisticas(acertadas + "/" + numero_preguntas), carga_pregunta()) : fbReseteo(!0) : fbReseteo(!0);
 }, t.onerror = function(e) {
-milog("code " + e.code + " leyendo .tst"), fbReseteo(!0);
+fbReseteo(!0);
 }, t.readAsText(e);
 }
 
@@ -5630,9 +5606,7 @@ function eleccion_lista(e) {
 var t = dir_test.createReader();
 t.readEntries(function(t) {
 filtra_listas(t, e);
-}, function(e) {
-milog("code " + e.code + " leyendo ficheros");
-});
+}, function(e) {});
 }
 
 function filtra_listas(e, t) {
@@ -5682,7 +5656,7 @@ num_estad += 1, num_estad == e.length && miTest.$.listas.setListas(e);
 }
 
 function salvar_marcadas(e) {
-console.log(e), marcas.sort(function(e, t) {
+marcas.sort(function(e, t) {
 return e - t;
 }), dir_test.getFile(e, {
 create: !0,
@@ -5690,47 +5664,37 @@ exclusive: !1
 }, function(t) {
 t.createWriter(function(n) {
 escribe_marcadas(n, t, e);
-}, function(t) {
-milog("error accediendo a " + e + " " + t.code);
-});
-}, function(t) {
-milog("error creando " + e + " " + t.code);
-});
+}, function(e) {});
+}, function(e) {});
 }
 
 function escribe_marcadas(e, t, n) {
-console.log("escribe_marcadas");
 var r = !1, i = [];
 n.onerror = function(e) {
-milog("error escribiendo " + n + " " + e.code), r = !0;
+r = !0;
 };
 for (var s = 0; s < marcas.length; s++) i.push(lista[marcas[s]]), i.push(lista[marcas[s] + 1 - 0]);
-console.log(i.toString()), e.write(i.join("\n")), console.log("Error: " + r);
+e.write(i.join("\n"));
 }
 
 function borrar_marcadas() {
-console.log("borrar_marcadas"), dir_test.getFile(nombre + ".171", {
+dir_test.getFile(nombre + ".171", {
 create: !0,
 exclusive: !1
 }, function(e) {
 e.createWriter(function(t) {
 escribe_nomarcadas(t, e);
-}, function(e) {
-milog("error accediendo a " + nombre + ".171 " + e.code);
-});
-}, function(e) {
-milog("error creando " + nombre + ".171 " + e.code);
-});
+}, function(e) {});
+}, function(e) {});
 }
 
 function escribe_nomarcadas(e, t) {
-console.log("escribe_nomarcadas");
 var n = !1, r = [];
 e.onerror = function(e) {
-milog("error escribiendo " + nombre + ".171 " + e.code), n = !0;
+n = !0;
 };
 for (var i = 0; i < lista.length - 1; i += 2) marcas.indexOf(i + "") < 0 && marcas.indexOf(i) < 0 && (r.push(lista[i]), r.push(lista[i + 1]));
-console.log(r.toString()), e.write(r.join("\n")), console.log("Error: " + n), n || renombra(t);
+e.write(r.join("\n")), n || renombra(t);
 }
 
 function renombra(e) {
@@ -5740,15 +5704,13 @@ actualiza_lista_marcas_estado(e);
 function n(e) {
 alert("Error");
 }
-console.log("renombra"), e.moveTo(dir_test, nombre + ".txt", t, n);
+e.moveTo(dir_test, nombre + ".txt", t, n);
 }
 
 function actualiza_lista_marcas_estado(e) {
-console.log("actualiza_lista_marcas_estado"), e.file(function(e) {
+e.file(function(e) {
 tamano_actual = e.size;
-}, function(e) {
-milog("err " + e.code + " accediendo " + fichLista);
-}), marcas.sort();
+}, function(e) {}), marcas.sort();
 var t, n, r;
 for (r = 0; r < marcas.length; r++) lista.splice(marcas[r], 2), t = control.indexOf(marcas[r]), t >= 0 && control.splice(t, 1);
 for (r = 0; r < marcas.length; r++) for (t = 0; t < control.length; t++) {
@@ -5769,22 +5731,15 @@ break;
 }
 
 function crea_fich(fich) {
-milog("crea_fich(" + fich + ")"), dir_test.getFile("TxTest.txt", {
+dir_test.getFile("TxTest.txt", {
 create: !0,
 exclusive: !0
 }, function(fileEntry) {
-fileEntry.createWriter(eval("escribe_" + fich.replace(".", "_")), function(e) {
-milog("error accediendo a " + fich + " " + e.code);
-});
-}, function(e) {
-alert("error creando TxTest.txt " + e.code);
-});
+fileEntry.createWriter(eval("escribe_" + fich.replace(".", "_")), function(e) {});
+}, function(e) {});
 }
 
 function escribe_TxTest_txt(e) {
-milog("escribe_TxTest");
 var t = [ "\u00bfDonde est\u00e1 esta lista?<br /><i>Where is this list?</i>", "/sdcard/TxTest/TxTest.txt", "\u00bfQue formato tiene una <u>lista</u>?<br /><i>Which is the format of a <u>list</u></i>?", "Las preguntas en las l\u00edneas impares, las respuestas en las pares.<br /><i>Odd lines are the questions, even lines are the answers.</i><br />Debe tener la extensi\u00f3n <b>.txt</b><br /><i>The extension must be <b>.txt</b></i>", "\u00bfComo est\u00e1 formateada esta pregunta?<br /><i>Which is the format of this question?</i><ol><li>aaaa</li><li>bbbb</li></ol>", "&iquest;Como est&aacute; formateada esta pregunta?&lt;br /&gt;&lt;i&gt;Which is the format of this question?&lt;/i&gt;&lt;ol&gt;&lt;li&gt;aaaa&lt;/li&gt;&lt;li&gt;bbbb&lt;/li&gt;&lt;/ol&gt;", "\u00bfComo puedo recrear esta lista?<br /><i>How can this list be created again?</i>", "Borra todos los ficheros .txt del directorio<br /><i>Delete all the .txt files of the folder</i>", "\u00bfComo forzar que se salve estado actual ahora (acertadas y marcas)?<br /><i>How to save the current state now (corrects and marks)?</i>", "Elige de nuevo la misma lista<br /><i>Choose the same list again</i>" ];
-e.onerror = function(e) {
-milog("error escribiendo TxTest.txt " + e.code);
-}, e.write(t.join("\n"));
+e.onerror = function(e) {}, e.write(t.join("\n"));
 }
