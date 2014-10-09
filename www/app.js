@@ -4961,7 +4961,7 @@ components: [ {
 classes: "repeater-item",
 components: [ {
 name: "nom_lista",
-style: "font-waight: bold"
+style: "font-weight: bold"
 }, {
 name: "estad",
 style: "text-align: right; font-size: smaller"
@@ -5400,7 +5400,8 @@ style: "text-align: center",
 ontap: "volver"
 } ],
 x_idiomaChanged: function() {
-this.x_idioma == 0 ? this.$.panta.setContent("<br />Autor: Antonio Tovar<br />antovar@260mb.com<br /><br />Ayuda:<br /><br />Toca en DISPONIBLES para elegir lista.<br /><br />Toca en nn/nn para reiniciar acertadas.<br /><br />Los ficheros deben tener en las l\u00edneas impares las preguntas y en las pares las respuestas (una sola l\u00ednea en cada caso).<br /><br />Las l\u00edneas pueden incluir c\u00f3digo html.<br /><br />Los ficheros deben colocarse en /sdcard/TxTest y tener extensi\u00f3n .txt") : this.$.panta.setContent("<br />Author: Antonio Tovar<br />antovar@260mb.com<br /><br />Help:<br /><br />Tap on AVAILABLES to choose list.<br /><br />Tap on nn/nn to reset corrects.<br /><br />Files must have questions in odd lines and answers in even lines (only one line in any case).<br /><br />Lines may include html code.<br /><br />Files must be copied to /sdcard/TxTest and have .txt extension.");
+var e = "Antonio Tovar<br /><b>antovar@gmail.com</b><br /><br />";
+this.x_idioma == 0 ? this.$.panta.setContent("<br />Autor: " + e + "Ayuda detallada en:<br /><b>http://antovar.260mb.com/TxTest</b><br /><br />Toca en <b>DISPONIBLES</b> para elegir lista.<br /><br />Toca en <b>nn/nn</b> para reiniciar acertadas.<br /><br />Los ficheros deben tener en las l\u00edneas impares las preguntas y en las pares las respuestas (una sola l\u00ednea en cada caso).<br /><br />Las l\u00edneas pueden incluir c\u00f3digo html.<br /><br />Los ficheros deben colocarse en <b>/sdcard/TxTest</b> y tener extensi\u00f3n <b>.txt</b>") : this.$.panta.setContent("<br />Author: " + e + "Help and instrucctions:<br /><b>http://antovar.260mb.com/TxTest/en</b><br /><br />Tap on <b>AVAILABLES</b> to choose list.<br /><br />Tap on <b>nn/nn</b> to reset corrects.<br /><br />Files must have questions in odd lines and answers in even lines (only one line in any case).<br /><br />Lines may include html code.<br /><br />Files must be copied to <b>/sdcard/TxTest</b> and have <b>.txt</b> extension.");
 },
 volver: function() {
 miTest.setIndex(0);
