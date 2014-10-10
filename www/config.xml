@@ -5,13 +5,27 @@
         xmlns:gap     = "http://phonegap.com/ns/1.0"
         id            = "com.antovar.txtest"
         versionCode   = "1"
-        version       = "0.7.0">
+        version       = "1.0">
 
     <name>TxTest</name>
 
     <description>
         Preguntas y respuestas
+        Questions and answers
+
+        Formato de texto simple (con html embebido)
+        Simple text format (with inline html code)
+
+        Se pueden eliminar preguntas
+        Questions can be removed
+
+        Se pueden generar sublistas de preguntas
+        Question sublists can be created
     </description>
+
+    <author href="http://antovar.260mb.com/TxTest" email="antovar@gmail.com">
+        Antonio Tovar
+    </author>
 
     <gap:platform name="android" />
 
